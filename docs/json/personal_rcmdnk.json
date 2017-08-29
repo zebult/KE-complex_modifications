@@ -762,7 +762,7 @@
       ]
     },
     {
-      "description": "ESC (or Control-[) send ESC 3 times",
+      "description": "ESC (or Control-[) sends ESC EISU ESC",
       "manipulators": [
         {
           "type": "basic",
@@ -774,7 +774,7 @@
               "key_code": "escape"
             },
             {
-              "key_code": "escape"
+              "key_code": "japanese_eisuu"
             },
             {
               "key_code": "escape"
@@ -836,7 +836,7 @@
               "key_code": "escape"
             },
             {
-              "key_code": "escape"
+              "key_code": "japanese_eisuu"
             },
             {
               "key_code": "escape"
