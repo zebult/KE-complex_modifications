@@ -1,0 +1,179 @@
+{
+  "title": "Personal rules (@rcmdnk)",
+  "rules": [
+    {
+      "description": "Copy and Paste, Control +z/x/c/v to Command +z/x/c/v",
+      "manipulators":
+      <%=
+        manipulators = each_key(
+          source_keys_list: ["z", "x", "c", "v"],
+          dest_keys_list: ["z", "x", "c", "v"],
+          from_mandatory_modifiers: ["control"],
+          to_modifiers: ["command"],
+          conditions: [frontmost_application_unless("emacs_key_bindings_exception", false)]
+        )
+        manipulators += each_key(
+          source_keys_list: ["z", "x", "c", "v"],
+          dest_keys_list: ["z", "x", "c", "v"],
+          from_mandatory_modifiers: ["shift", "control"],
+          to_modifiers: ["shift", "command"],
+          conditions: [frontmost_application_unless("emacs_key_bindings_exception", false)]
+        )
+        JSON.generate(manipulators)
+      %>
+    },
+    {
+      "description": "Browser: Swap Control + left click and Command + left click",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": <%= from_button("button1", ["control"]) %>,
+          "to": <%= to_button([["button1", ["command"]]]) %>,
+          "conditions": [ <%= frontmost_application_if("browser") %> ]
+        },
+        {
+          "type": "basic",
+          "from": <%= from_button("button1", ["command"]) %>,
+          "to": <%= to_button([["button1", ["control"]]]) %>,
+          "conditions": [ <%= frontmost_application_if("browser") %> ]
+        }
+      ]
+    },
+    {
+      "description": "Change command-control h/j/k/l to arrow keys",
+      "manipulators":
+      <%=
+        each_key(
+          source_keys_list: ["h", "j", "k", "l"],
+          dest_keys_list: ["left_arrow", "down_arrow", "up_arrow", "right_arrow"],
+          from_mandatory_modifiers: ["control", "command"],
+          as_json: true
+        )
+      %>
+    },
+    {
+      "description": "Misison Control (control-command-shift + h/l to move to left/right desctop",
+      "manipulators":
+      <%=
+        each_key(
+          source_keys_list: ["h", "l"],
+          dest_keys_list: ["left_arrow", "right_arrow"],
+          from_mandatory_modifiers: ["control", "command", "shift"],
+          to_modifiers: ["control"],
+          as_json: true
+        )
+      %>
+    },
+    {
+      "description": "Window Actions",
+      "manipulators": [
+        <%=
+          askeys = [
+            ["4", ["command"], "close"],
+            ["4", ["control"], "close"],
+            ["a", ["control", "command"], "closeToDock"],
+            ["spacebar", ["option"], "focusMenu"],
+            ["period", ["option"], "moveForMon"],
+            ["slash", ["command", "shift"], "moveForMonAll"],
+            ["y", ["control", "shift"], "windowMoveLeft"],
+            ["u", ["control", "shift"], "windowMoveDown"],
+            ["i", ["control", "shift"], "windowMoveUp"],
+            ["o", ["control", "shift"], "windowMoveRight"],
+            ["y", ["command", "shift", "control"], "winMoveScreenLeft"],
+            ["u", ["command", "shift", "control"], "winMoveScreenDown"],
+            ["i", ["command", "shift", "control"], "winMoveScreenUp"],
+            ["o", ["command", "shift", "control"], "winMoveScreenRight"],
+            ["return_or_enter", ["command", "control"], "wsFull"],
+            ["return_or_enter", ["command", "shift"], "wsFull"],
+            ["return_or_enter", ["command", "control", "shift"], "wsHalf"],
+            ["h", ["command", "shift"], "wsHalfLeft"],
+            ["j", ["command", "shift"], "wsHalfBottom"],
+            ["k", ["command", "shift"], "wsHalfTop"],
+            ["l", ["command", "shift"], "wsHalfRight"],
+            ["y", ["command", "shift"], "windowResizeWidthMinus"],
+            ["u", ["command", "shift"], "windowResizeHeightPlus"],
+            ["i", ["command", "shift"], "windowResizeHeightMinus"],
+            ["o", ["command", "shift"], "windowResizeWidthPlus"]
+          ]
+          manipulators = ""
+          for key in askeys do
+            manipulators += "{
+              \"type\": \"basic\",
+              \"from\": #{from(key[0], key[1])},
+              \"to\": [{\"shell_command\": \"osascript ~/Library/Scripts/#{key[2]}.scpt\"}]
+            },"
+          end
+          manipulators.chop!
+          manipulators
+        %>
+      ]
+    },
+    {
+      "description": "Mouse cursor move",
+      "manipulators": [
+        <%=
+          mousekeys = [
+            ["y", ["command", "control"], "mouseMoveLeft"],
+            ["u", ["command", "control"], "mouseMoveDown"],
+            ["i", ["command", "control"], "mouseMoveUp"],
+            ["o", ["command", "control"], "mouseMoveRight"]
+          ]
+          manipulators = ""
+          for key in mousekeys do
+            manipulators += "{
+              \"type\": \"basic\",
+              \"from\": #{from(key[0], key[1])},
+              \"to\": [{\"shell_command\": \"osascript ~/Library/Scripts/#{key[2]}.scpt\"}]
+            },"
+          end
+          manipulators
+        %>
+        {
+          "type": "basic",
+          "from": <%= from("n", ["command", "control"]) %>,
+          "to": <%= to_button([["button1"]]) %>
+        },
+        {
+          "type": "basic",
+          "from": <%= from("p", ["command", "control"]) %>,
+          "to": <%= to_button([["button2"]]) %>
+        }
+      ]
+    },
+    {
+      "description": "Others (Dock, Sleep, Delete)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": <%= from("m", ["control"]) %>,
+          "to": <%= to([["F3", ["control"]]]) %>
+        },
+        {
+          "type": "basic",
+          "from": <%= from("l", ["option"]) %>,
+          "to": <%= to([["eject", ["control", "shift"]]]) %>
+        },
+        {
+          "type": "basic",
+          "from": <%= from("d", ["command"]) %>,
+          "to": <%= to([["delete_or_backspace", ["command"]]]) %>
+        },
+        {
+          "type": "basic",
+          "from": <%= from("delete_or_backspace", ["control"]) %>,
+          "to": <%= to([["delete_or_backspace", ["command"]]]) %>
+        },
+        {
+          "type": "basic",
+          "from": <%= from("left_arrow", ["option"]) %>,
+          "to": <%= to([["open_bracket", ["command"]]]) %>
+        },
+        {
+          "type": "basic",
+          "from": <%= from("right_arrow", ["option"]) %>,
+          "to": <%= to([["close_bracket", ["command"]]]) %>
+        }
+      ]
+    }
+  ]
+}

@@ -3,9 +3,8 @@
 require 'erb'
 require 'json'
 
-def _from(key_code, mandatory_modifiers, optional_modifiers)
+def _from_data(mandatory_modifiers, optional_modifiers=[])
   data = {}
-  data['key_code'] = key_code
 
   mandatory_modifiers.each do |m|
     data['modifiers'] = {} if data['modifiers'].nil?
@@ -21,8 +20,26 @@ def _from(key_code, mandatory_modifiers, optional_modifiers)
   data
 end
 
-def from(key_code, mandatory_modifiers, optional_modifiers)
+def _from(key_code, mandatory_modifiers, optional_modifiers=[])
+  data = {}
+  data['key_code'] = key_code
+  data.merge!(_from_data(mandatory_modifiers, optional_modifiers))
+  data
+end
+
+def from(key_code, mandatory_modifiers, optional_modifiers=[])
   JSON.generate(_from(key_code, mandatory_modifiers, optional_modifiers))
+end
+
+def _from_button(button, mandatory_modifiers, optional_modifiers=[])
+  data = {}
+  data['pointing_button'] = button
+  data.merge!(_from_data(mandatory_modifiers, optional_modifiers))
+  data
+end
+
+def from_button(button, mandatory_modifiers, optional_modifiers=[])
+  JSON.generate(_from_button(button, mandatory_modifiers, optional_modifiers))
 end
 
 def _to(events)
@@ -42,6 +59,25 @@ end
 
 def to(events)
   JSON.generate(_to(events))
+end
+
+def _to_button(events)
+  data = []
+
+  events.each do |e|
+    d = {}
+    d['pointing_button'] = e[0]
+    unless e[1].nil?
+      d['modifiers'] = e[1]
+    end
+
+    data << d
+  end
+  data
+end
+
+def to_button(events)
+  JSON.generate(_to_button(events))
 end
 
 
@@ -84,7 +120,7 @@ def each_key(source_keys_list: :source_keys_list, dest_keys_list: :dest_keys_lis
   end
 end
 
-def frontmost_application(type, app_aliases)
+def frontmost_application(type, app_aliases, as_json=true)
   browser_bundle_identifiers = [
     '^org\.mozilla\.firefox$',
     '^com\.google\.Chrome$',
@@ -184,19 +220,24 @@ def frontmost_application(type, app_aliases)
   end
 
   unless bundle_identifiers.empty?
-    JSON.generate({
-                    "type" => type,
-                    "bundle_identifiers" => bundle_identifiers,
-                  })
+    data = {
+      "type" => type,
+      "bundle_identifiers" => bundle_identifiers
+    }
+    if as_json
+      JSON.generate(data)
+    else
+      data
+    end
   end
 end
 
-def frontmost_application_if(app_aliases)
-  frontmost_application('frontmost_application_if', app_aliases)
+def frontmost_application_if(app_aliases, as_json=true)
+  frontmost_application('frontmost_application_if', app_aliases, as_json)
 end
 
-def frontmost_application_unless(app_aliases)
-  frontmost_application('frontmost_application_unless', app_aliases)
+def frontmost_application_unless(app_aliases, as_json=true)
+  frontmost_application('frontmost_application_unless', app_aliases, as_json)
 end
 
 template = ERB.new $stdin.read
