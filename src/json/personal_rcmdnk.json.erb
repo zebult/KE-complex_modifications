@@ -162,18 +162,6 @@
       %>
     },
     {
-      "description": "Change cmd-ctrl-h/j/k/l to arrow keys",
-      "manipulators":
-      <%=
-        each_key(
-          source_keys_list: ["h", "j", "k", "l"],
-          dest_keys_list: ["left_arrow", "down_arrow", "up_arrow", "right_arrow"],
-          from_mandatory_modifiers: ["control", "command"],
-          as_json: true
-        )
-      %>
-    },
-    {
       "description": "Window Actions",
       "manipulators": [
         <%=
