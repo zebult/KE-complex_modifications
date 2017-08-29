@@ -2,9 +2,9 @@
 
 # KE-complex_modifications
 
-complex_modifications for Karabiner-Elements.
+complex_modifications for Karabiner-Elements by rcmdnk.
 
-https://pqrs.org/osx/karabiner/complex_modifications/
+http://rcmdnk.com/KE-complex_modifications/
 
 ## Update docs
 

@@ -148,9 +148,12 @@ def frontmost_application(type, app_aliases, as_json=true)
     '^com\.2X\.Client\.Mac$',
   ]
 
-  terminal_bundle_identifiers = [
-    '^com\.apple\.Terminal$',
+  iterm2_bundle_identifiers = [
     '^com\.googlecode\.iterm2$',
+  ]
+
+  terminal_bundle_identifiers = iterm2_bundle_identifiers + [
+    '^com\.apple\.Terminal$',
     '^co\.zeit\.hyperterm$',
     '^co\.zeit\.hyper$',
   ]
@@ -188,6 +191,9 @@ def frontmost_application(type, app_aliases, as_json=true)
 
   app_aliases.each do |app_alias|
     case app_alias
+    when 'iterm2'
+      bundle_identifiers.concat(iterm2_bundle_identifiers)
+
     when 'terminal'
       bundle_identifiers.concat(terminal_bundle_identifiers)
 
