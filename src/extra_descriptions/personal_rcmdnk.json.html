@@ -4,19 +4,22 @@
 
 <ul>
   <li>Only for HHKB (vendor id = 2131).</li>
+  <li>And only for terminal, vim, emacs.</li>
   <li>As HHKB's ESC is place for them at normal keyboard.</li>
   <li>Need to map Control-[ to ESC as in below setting.</li>
-  <li>ESC: Grave accent (&#96;).</li>
-  <li>Shift-ESC: Tilde (~).</li>
 </ul>
 
-<p style="margin-top: 20px; font-weight: bold">
-  Control-[ to ESC
-</p>
-
-<ul>
-  <li>Control-[: ESC everywhere.</li>
-</ul>
+<table class="table">
+  <caption>Key bindings</caption>
+  <tr>
+    <td>ESC</td>
+    <td>&#96; (Grave accent)</td>
+  </tr>
+  <tr>
+    <td>Shift-ESC</td>
+    <td>~ (Tilde)</td>
+  </tr>
+</table>
 
 <p style="margin-top: 20px; font-weight: bold">
   iTerm2 command (Meta) keys
@@ -28,14 +31,22 @@
 </ul>
 
 <p style="margin-top: 20px; font-weight: bold">
-  ESC (or Control-[) send ESC 3 times
+  ESC (or Control-[) send ESC EISU ESC
 </p>
 
 <ul>
   <li>For terminal, vim, emacs</li>
-  <li>Send ESC 3 times to stop changing at IME, disable IME and change to Normal mode at Vim at once.</li>
-  <li>Need to set ESC to IME off in IME setting.</li>
+  <li>Send ESC, EISU and ESC to stop changing at IME, disable IME and change to Normal mode at Vim at once.</li>
   <li>Need to disable ESC at copy mode if GNU screen is used.</li>
+  <ul>
+    <li> Add following line in your .screenrc to disable ESC at copy mode:<br>
+<code>bindkey -m ^[ eval ''</code>
+  </ul>
+  <li>Key bindings:</li>
+  <ul>
+    <li>ESC : ESC, EISU, ESC
+    <li>Control-[ : ESC, EISU, ESC
+  </ul>
 </ul>
 
 <p style="margin-top: 20px; font-weight: bold">
@@ -45,6 +56,13 @@
 <ul>
   <li>For other than terminal, vim, emacs.</li>
   <li>Copy and Paste with control key.</li>
+  <li>Key bindings:</li>
+  <ul>
+    <li>Control-Z : Command-Z
+    <li>Control-X : Command-X
+    <li>Control-C : Command-C
+    <li>Control-V : Command-V
+  </ul>
 </ul>
 
 <p style="margin-top: 20px; font-weight: bold">
@@ -53,10 +71,13 @@
 
 <ul>
   <li>For other than terminal, vim, emacs.</li>
-  <li>Control-I: Command-] (Next Page)</li>
-  <li>Control-O: Command-[ (Prev Page)</li>
-  <li>Option-Left_Arrow: Command-] (Next Page)</li>
-  <li>Option-Right_Arrow: Command-[ (Prev Page)</li>
+  <li>Key bindings:</li>
+  <ul>
+    <li>Control-I : Command-] (Next Page)</li>
+    <li>Control-O : Command-[ (Prev Page)</li>
+    <li>Option-Left_Arrow : Command-] (Next Page)</li>
+    <li>Option-Right_Arrow : Command-[ (Prev Page)</li>
+  </ul>
 </ul>
 
 <p style="margin-top: 20px; font-weight: bold">
@@ -65,11 +86,14 @@
 
 <ul>
   <li>For Firefox, Chrome, Safari.</li>
-  <li>Command-Tab: Command-Option-Right_Arrow.</li>
-  <li>Command-Shift-Tab: Command-Option-Right_Arrow.</li>
-  <li>Control-O: Command-[ (Prev Page)</li>
-  <li>Option-Left_Arrow: Command-] (Next Page)</li>
-  <li>Option-Right_Arrow: Command-[ (Prev Page)</li>
+  <li>Key bindings:</li>
+  <ul>
+    <li>Command-Tab : Command-Option-Right_Arrow.</li>
+    <li>Command-Shift-Tab : Command-Option-Right_Arrow.</li>
+    <li>Control-O : Command-[ (Prev Page)</li>
+    <li>Option-Left_Arrow : Command-] (Next Page)</li>
+    <li>Option-Right_Arrow : Command-[ (Prev Page)</li>
+  </ul>
 </ul>
 
 <p style="margin-top: 20px; font-weight: bold">
@@ -78,11 +102,14 @@
 
 <ul>
   <li>For Microsoft Office (Word, PowerPoint, Excel).</li>
-  <li>Control-H: Backspace.</li>
-  <li>Control-Command-Shift-S: Change font to Symbol.</li>
-  <li>Control-Command-Shift-H: Change font to Helvetica.</li>
-  <li>Control-= (equal): Change to superscript.</li>
-  <li>Control-- (hyphen): Change to subscript.</li>
+  <li>Key bindings:</li>
+  <ul>
+    <li>Control-H : Backspace.</li>
+    <li>Control-Command-Shift-S : Change font to Symbol.</li>
+    <li>Control-Command-Shift-H : Change font to Helvetica.</li>
+    <li>Control-= (equal) : Change to superscript.</li>
+    <li>Control-- (hyphen) : Change to subscript.</li>
+  </ul>
 </ul>
 
 <p style="margin-top: 20px; font-weight: bold">
@@ -91,10 +118,13 @@
 
 <ul>
   <li>Vim like move.</li>
-  <li>Command-Control-H: Left_Arrow.</li>
-  <li>Command-Control-J: Down_Arrow.</li>
-  <li>Command-Control-K: Up_Arrow.</li>
-  <li>Command-Control-L: Right_Arrow.</li>
+  <li>Key bindings:</li>
+  <ul>
+    <li>Command-Control-H : Left_Arrow.</li>
+    <li>Command-Control-J : Down_Arrow.</li>
+    <li>Command-Control-K : Up_Arrow.</li>
+    <li>Command-Control-L : Right_Arrow.</li>
+  </ul>
 </ul>
 
 <p style="margin-top: 20px; font-weight: bold">
@@ -104,30 +134,33 @@
 <ul>
   <li>Window actions with AppleScript.</li>
   <li>Need [rcmdnk/AppleScript](https://github.com/rcmdnk/AppleScript) to be installed.</li>
-  <li>Command-4: Close the frontmost window.</li>
-  <li>Control-4: Close the frontmost window.</li>
-  <li>Option-Space: Focus on Menu.</li>
-  <li>Option-Period: Move frontmost window to the proper place.</li>
-  <li>Command-Shift-Slash: Move all windows to the proper place.</li>
-  <li>Control-Shift-Y: Move window left.</li>
-  <li>Control-Shift-U: Move window down.</li>
-  <li>Control-Shift-K: Move window up.</li>
-  <li>Control-Shift-L: Move window right.</li>
-  <li>Command-Control-Shift-Y: Move window to the left screen.</li>
-  <li>Command-Control-Shift-U: Move window to the lower screen.</li>
-  <li>Command-Control-Shift-K: Move window to the upper screen.</li>
-  <li>Command-Control-Shift-L: Move window to the right screen.</li>
-  <li>Command-Control-Return: Make window almost full screen.</li>
-  <li>Command-Shift-Return: Make window almost full screen.</li>
-  <li>Command-Control-Shift-Return: Make window ~0.7 of full screen.</li>
-  <li>Command-Shift-H: Make window left half.</li>
-  <li>Command-Shift-J: Make window bottom half.</li>
-  <li>Command-Shift-K: Make window top half.</li>
-  <li>Command-Shift-L: Make window right half.</li>
-  <li>Command-Shift-Y: Reduce window width.</li>
-  <li>Command-Shift-U: Increase window height.</li>
-  <li>Command-Shift-I: Reduce window height.</li>
-  <li>Command-Shift-O: Increase window width.</li>
+  <li>Key bindings:</li>
+  <ul>
+    <li>Command-4 : Close the frontmost window.</li>
+    <li>Control-4 : Close the frontmost window.</li>
+    <li>Option-Space : Focus on Menu.</li>
+    <li>Option-Period : Move frontmost window to the proper place.</li>
+    <li>Command-Shift-Slash : Move all windows to the proper place.</li>
+    <li>Control-Shift-Y : Move window left.</li>
+    <li>Control-Shift-U : Move window down.</li>
+    <li>Control-Shift-K : Move window up.</li>
+    <li>Control-Shift-L : Move window right.</li>
+    <li>Command-Control-Shift-Y : Move window to the left screen.</li>
+    <li>Command-Control-Shift-U : Move window to the lower screen.</li>
+    <li>Command-Control-Shift-K : Move window to the upper screen.</li>
+    <li>Command-Control-Shift-L : Move window to the right screen.</li>
+    <li>Command-Control-Return : Make window almost full screen.</li>
+    <li>Command-Shift-Return : Make window almost full screen.</li>
+    <li>Command-Control-Shift-Return : Make window ~0.7 of full screen.</li>
+    <li>Command-Shift-H : Make window left half.</li>
+    <li>Command-Shift-J : Make window bottom half.</li>
+    <li>Command-Shift-K : Make window top half.</li>
+    <li>Command-Shift-L : Make window right half.</li>
+    <li>Command-Shift-Y : Reduce window width.</li>
+    <li>Command-Shift-U : Increase window height.</li>
+    <li>Command-Shift-I : Reduce window height.</li>
+    <li>Command-Shift-O : Increase window width.</li>
+  </ul>
 </ul>
 
 <p style="margin-top: 20px; font-weight: bold">
@@ -137,27 +170,44 @@
 <ul>
   <li>Need [rcmdnk/AppleScript](https://github.com/rcmdnk/AppleScript) to be installed.</li>
   <li>Need to enable Mouse Key from System Preferences&rarr;Accessibility&rarr;Mouse and Trackpad.</li>
-  <li>Control-Shift-H: Move cursor left.</li>
-  <li>Control-Shift-J: Move cursor down.</li>
-  <li>Control-Shift-K: Move cursor up.</li>
-  <li>Control-Shift-L: Move cursor right.</li>
-  <li>Control-Shift-N: Left click.</li>
-  <li>Control-Shift-M: Middle click.</li>
-  <li>Control-Shift-P: Right click.</li>
+  <li>Key bindings:</li>
+  <ul>
+    <li>Control-Shift-H : Move cursor left.</li>
+    <li>Control-Shift-J : Move cursor down.</li>
+    <li>Control-Shift-K : Move cursor up.</li>
+    <li>Control-Shift-L : Move cursor right.</li>
+    <li>Control-Shift-N : Left click.</li>
+    <li>Control-Shift-M : Middle click.</li>
+    <li>Control-Shift-P : Right click.</li>
+  </ul>
 </ul>
 
 <p style="margin-top: 20px; font-weight: bold">
-  Others (Esc, Dock, Sleep, Delete, IME, Misison Control, Spotlight)
+  Control-[ to ESC
 </p>
 
 <ul>
-  <li>Control-M: Control-F3 (Focus on Dock).</li>
-  <li>Option-L: Control-Shift-Eject (Sleep).</li>
-  <li>Command-D: Command-Delete (Delete selected file).</li>
-  <li>Control-Delete: Command-Delete (Delete selected file).</li>
-  <li>Control-Space: Control-Option-Space (Choose previous IME).</li>
-  <li>Command-Control-Shift-H: Move to the left space of Mission Control.</li>
-  <li>Command-Control-Shift-L: Move to the right space of Mission Control.</li>
-  <li>Command-Control-F: Command-Space (Launch spotlight).</li>
+  <li>Key bindings:</li>
+  <ul>
+    <li>Control-[ : ESC everywhere.</li>
+  </ul>
+</ul>
+
+<p style="margin-top: 20px; font-weight: bold">
+  Others (Dock, Sleep, Delete, IME, Misison Control, Spotlight)
+</p>
+
+<ul>
+  <li>Key bindings:</li>
+  <ul>
+    <li>Control-M : Control-F3 (Focus on Dock).</li>
+    <li>Option-L : Control-Shift-Eject (Sleep).</li>
+    <li>Command-D : Command-Delete (Delete selected file).</li>
+    <li>Control-Delete : Command-Delete (Delete selected file).</li>
+    <li>Control-Space : Control-Option-Space (Choose previous IME).</li>
+    <li>Command-Control-Shift-H : Move to the left space of Mission Control.</li>
+    <li>Command-Control-Shift-L : Move to the right space of Mission Control.</li>
+    <li>Command-Control-F : Command-Space (Launch spotlight).</li>
+  </ul>
 </ul>
 

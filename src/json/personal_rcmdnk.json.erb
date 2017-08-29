@@ -8,23 +8,13 @@
           "type": "basic",
           "from": <%= from("escape", []) %>,
           "to": <%= to([["grave_accent_and_tilde", []]]) %>,
-          "conditions": [ <%= device_if("hhkb") %> ]
+          "conditions": [ <%= device_if("hhkb") %>, <%= frontmost_application_if("emacs_key_bindings_exception") %> ]
         },
         {
           "type": "basic",
           "from": <%= from("escape", ["shift"]) %>,
           "to": <%= to([["grave_accent_and_tilde", ["shift"]]]) %>,
-          "conditions": [ <%= device_if("hhkb") %> ]
-        }
-      ]
-    },
-    {
-      "description": "Control-[ to ESC",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": <%= from("open_bracket", ["control"]) %>,
-          "to": <%= to([["escape"]]) %>
+          "conditions": [ <%= device_if("hhkb") %>, <%= frontmost_application_if("emacs_key_bindings_exception") %> ]
         }
       ]
     },
@@ -47,18 +37,18 @@
       %>
     },
     {
-      "description": "ESC (or Control-[) send ESC 3 times",
+      "description": "ESC (or Control-[) sends ESC EISU ESC",
       "manipulators": [
         {
           "type": "basic",
           "from": <%= from("escape", []) %>,
-          "to": <%= to([["escape"], ["escape"]]) %>,
+          "to": <%= to([["escape"], ["japanese_eisuu"], ["escape"]]) %>,
           "conditions": [ <%= frontmost_application_if("emacs_key_bindings_exception") %> ]
         },
         {
           "type": "basic",
           "from": <%= from("open_bracket", ["control"]) %>,
-          "to": <%= to([["escape"], ["escape"]]) %>,
+          "to": <%= to([["escape"], ["japanese_eisuu"], ["escape"]]) %>,
           "conditions": [ <%= frontmost_application_if("emacs_key_bindings_exception") %> ]
         }
       ]
@@ -259,6 +249,16 @@
           "type": "basic",
           "from": <%= from("p", ["control", "shift"]) %>,
           "to": <%= to_button([["button2"]]) %>
+        }
+      ]
+    },
+    {
+      "description": "Control-[ to ESC",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": <%= from("open_bracket", ["control"]) %>,
+          "to": <%= to([["escape"]]) %>
         }
       ]
     },
