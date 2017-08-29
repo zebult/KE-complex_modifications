@@ -24,7 +24,7 @@
         {
           "type": "basic",
           "from": <%= from("open_bracket", ["control"]) %>,
-          "to": <%= to([["escape", []]]) %>
+          "to": <%= to([["escape"]]) %>
         }
       ]
     },
@@ -45,6 +45,23 @@
           as_json: true
         )
       %>
+    },
+    {
+      "description": "ESC (or Control-[) send ESC 3 times",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": <%= from("escape", []) %>,
+          "to": <%= to([["escape"], ["escape"]]) %>,
+          "conditions": [ <%= frontmost_application_if("emacs_key_bindings_exception") %> ]
+        },
+        {
+          "type": "basic",
+          "from": <%= from("open_bracket", ["control"]) %>,
+          "to": <%= to([["escape"], ["escape"]]) %>,
+          "conditions": [ <%= frontmost_application_if("emacs_key_bindings_exception") %> ]
+        }
+      ]
     },
     {
       "description": "Copy and Paste, ctrl-z/x/c/v to cmd-z/x/c/v",
@@ -246,7 +263,7 @@
       ]
     },
     {
-      "description": "Others (Dock, Sleep, Delete, IME, Misison Control)",
+      "description": "Others (Dock, Sleep, Delete, IME, Misison Control, Spotlight)",
       "manipulators": [
         <%# Focus on Dock %>
         {
@@ -292,6 +309,12 @@
           "type": "basic",
           "from": <%= from("l", ["command", "control", "shift"]) %>,
           "to": <%= to([["right_arrow", ["control"]]]) %>
+        },
+        <%# Spotlight %>
+        {
+          "type": "basic",
+          "from": <%= from("f", ["command", "control"]) %>,
+          "to": <%= to([["spacebar", ["command"]]]) %>
         }
       ]
     }

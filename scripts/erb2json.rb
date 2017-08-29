@@ -305,11 +305,11 @@ def device(type, device_aliases, as_json=true)
 end
 
 def device_if(device_aliases, as_json=true)
-  device('frontmost_device_if', device_aliases, as_json)
+  device('device_if', device_aliases, as_json)
 end
 
 def device_unless(app_aliases, as_json=true)
-  device('frontmost_device_unless', device_aliases, as_json)
+  device('device_unless', device_aliases, as_json)
 end
 
 template = ERB.new $stdin.read
