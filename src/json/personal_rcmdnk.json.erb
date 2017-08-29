@@ -2,6 +2,23 @@
   "title": "Personal rules (@rcmdnk)",
   "rules": [
     {
+      "description": "For HHK (Esc to `(~))",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": <%= from("escape", []) %>,
+          "to": <%= to([["grave_accent_and_tilde", []]]) %>,
+          "conditions": [ <%= device_if("hhkb") %> ]
+        },
+        {
+          "type": "basic",
+          "from": <%= from("escape", ["shift"]) %>,
+          "to": <%= to([["grave_accent_and_tilde", ["shift"]]]) %>,
+          "conditions": [ <%= device_if("hhkb") %> ]
+        }
+      ]
+    },
+    {
       <%# {% post_card /blog/2016/10/06/computer-mac-iterm/ MacのiTerm/ターミナルでメタキー(Alt)を使う方法 %} %>
       "description": "iTerm2 command (Meta) keys",
       "manipulators":
@@ -41,6 +58,27 @@
       %>
     },
     {
+      "description": "Next/Prev by ctrl-i/o, option-left/right arrow",
+      "manipulators":
+      <%=
+        manipulators = each_key(
+          source_keys_list: ["i", "o"],
+          dest_keys_list: ["close_bracket", "open_bracket"],
+          from_mandatory_modifiers: ["control"],
+          to_modifiers: ["command"],
+          conditions: [frontmost_application_unless("emacs_key_bindings_exception", false)]
+        )
+        manipulators += each_key(
+          source_keys_list: ["right_arrow", "left_arrow"],
+          dest_keys_list: ["close_bracket", "open_bracket"],
+          from_mandatory_modifiers: ["option"],
+          to_modifiers: ["command"],
+          conditions: [frontmost_application_unless("emacs_key_bindings_exception", false)]
+        )
+        JSON.generate(manipulators)
+      %>
+    },
+    {
       "description": "For browsers (cmd-(shift-)tab to cmd-opt-right(left))",
       "manipulators": [
         {
@@ -58,12 +96,45 @@
       ]
     },
     {
-      "description": "Microsoft Office (ctrl-h)",
+      "description": "Microsoft Office (ctrl-h, font, upper/lower)",
       "manipulators": [
+        <%# ctrl-h %>
         {
           "type": "basic",
           "from": <%= from("h", ["control"]) %>,
           "to": <%= to([["delete_or_backspace"]]) %>,
+          "conditions": [ <%= frontmost_application_if("office") %> ]
+        },
+        <%# font Symbol %>
+        {
+          "type": "basic",
+          "from": <%= from("s", ["control", "command", "shift"]) %>,
+          "to": <%= to([["t", ["command"]], ["tab"], ["s"], ["y"], ["m"], ["b"], ["o"], ["l"], ["return_or_enter"]]) %>,
+          "conditions": [ <%= frontmost_application_if("office") %> ]
+        },
+        <%# font Helvetica %>
+        {
+          "type": "basic",
+          "from": <%= from("h", ["control", "command", "shift"]) %>,
+          "to": <%= to([["t", ["command"]], ["tab"], ["h"], ["e"], ["l"], ["v"], ["e"], ["t"], ["i"], ["c"], ["a"], ["return_or_enter"]]) %>,
+          "conditions": [ <%= frontmost_application_if("office") %> ]
+        },
+        <%# Upper %>
+        {
+          "type": "basic",
+          "from": <%= from("equal_sign", ["control"]) %>,
+          "to": <%= to([["t", ["command"]],
+                        ["tab"], ["tab"], ["tab"], ["tab"], ["tab"], ["tab"], ["tab"], ["tab"], ["tab"], ["tab"],
+                        ["spacebar"], ["return_or_enter"]]) %>,
+          "conditions": [ <%= frontmost_application_if("office") %> ]
+        },
+        <%# Lower %>
+        {
+          "type": "basic",
+          "from": <%= from("hyphen", ["control"]) %>,
+          "to": <%= to([["t", ["command"]],
+                        ["tab"], ["tab"], ["tab"], ["tab"], ["tab"], ["tab"], ["tab"], ["tab"], ["tab"], ["tab"], ["tab"],
+                        ["spacebar"], ["return_or_enter"]]) %>,
           "conditions": [ <%= frontmost_application_if("office") %> ]
         }
       ]
@@ -76,19 +147,6 @@
           source_keys_list: ["h", "j", "k", "l"],
           dest_keys_list: ["left_arrow", "down_arrow", "up_arrow", "right_arrow"],
           from_mandatory_modifiers: ["control", "command"],
-          as_json: true
-        )
-      %>
-    },
-    {
-      "description": "Misison Control (ctrl-cmd-shift + h/l to move to left/right desctop",
-      "manipulators":
-      <%=
-        each_key(
-          source_keys_list: ["h", "l"],
-          dest_keys_list: ["left_arrow", "right_arrow"],
-          from_mandatory_modifiers: ["control", "command", "shift"],
-          to_modifiers: ["control"],
           as_json: true
         )
       %>
@@ -213,14 +271,25 @@
         },
         {
           "type": "basic",
+          "from": <%= from("m", ["control", "shift"]) %>,
+          "to": <%= to_button([["button3"]]) %>
+        },
+        {
+          "type": "basic",
           "from": <%= from("p", ["control", "shift"]) %>,
           "to": <%= to_button([["button2"]]) %>
         }
       ]
     },
     {
-      "description": "Others (Dock, Sleep, Delete, IME)",
+      "description": "Others (Esc, Dock, Sleep, Delete, IME, Misison Control)",
       "manipulators": [
+        <%# ctrl-[ to ESC %>
+        {
+          "type": "basic",
+          "from": <%= from("open_bracket", ["control"]) %>,
+          "to": <%= to([["escape"]]) %>
+        },
         <%# Focus on Dock %>
         {
           "type": "basic",
@@ -244,17 +313,6 @@
           "from": <%= from("delete_or_backspace", ["control"]) %>,
           "to": <%= to([["delete_or_backspace", ["command"]]]) %>
         },
-        <%# Prev/Next %>
-        {
-          "type": "basic",
-          "from": <%= from("left_arrow", ["option"]) %>,
-          "to": <%= to([["open_bracket", ["command"]]]) %>
-        },
-        {
-          "type": "basic",
-          "from": <%= from("right_arrow", ["option"]) %>,
-          "to": <%= to([["close_bracket", ["command"]]]) %>
-        },
         <%# IME %>
         {
           "type": "basic",
@@ -265,6 +323,17 @@
           "type": "basic",
           "from": <%= from("spacebar", ["command"]) %>,
           "to": <%= to([["spacebar", ["option", "control"]]]) %>
+        },
+        <%# Mission Control %>
+        {
+          "type": "basic",
+          "from": <%= from("h", ["command", "control", "shift"]) %>,
+          "to": <%= to([["left_arrow", ["control"]]]) %>
+        },
+        {
+          "type": "basic",
+          "from": <%= from("l", ["command", "control", "shift"]) %>,
+          "to": <%= to([["right_arrow", ["control"]]]) %>
         }
       ]
     }

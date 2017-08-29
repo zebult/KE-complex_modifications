@@ -270,5 +270,47 @@ def frontmost_application_unless(app_aliases, as_json=true)
   frontmost_application('frontmost_application_unless', app_aliases, as_json)
 end
 
+def device(type, device_aliases, as_json=true)
+  hhkb_id = {"vendor_id": 2131}
+
+  # ----------------------------------------
+
+  ids = []
+
+  unless device_aliases.is_a? Enumerable
+    device_aliases = [ device_aliases ]
+  end
+
+  device_aliases.each do |device_alias|
+    case device_alias
+    when 'hhkb'
+      ids.push(hhkb_id)
+
+    else
+      $stderr << "unknown hhkb_alias: #{device_aliases}\n"
+    end
+  end
+
+  unless ids.empty?
+    data = {
+      "type" => type,
+      "identifiers" => ids
+    }
+    if as_json
+      JSON.generate(data)
+    else
+      data
+    end
+  end
+end
+
+def device_if(device_aliases, as_json=true)
+  device('frontmost_device_if', device_aliases, as_json)
+end
+
+def device_unless(app_aliases, as_json=true)
+  device('frontmost_device_unless', device_aliases, as_json)
+end
+
 template = ERB.new $stdin.read
 puts JSON.pretty_generate(JSON.parse(template.result))
