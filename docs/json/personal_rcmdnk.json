@@ -628,7 +628,7 @@
       ]
     },
     {
-      "description": "Copy and Paste, Control +z/x/c/v to Command +z/x/c/v",
+      "description": "Copy and Paste, ctrl-z/x/c/v to cmd-z/x/c/v",
       "manipulators": [
         {
           "type": "basic",
@@ -1113,23 +1113,24 @@
       ]
     },
     {
-      "description": "Browser: Swap Control + left click and Command + left click",
+      "description": "For browsers (cmd-(shift-)tab to cmd-opt-right(left))",
       "manipulators": [
         {
           "type": "basic",
           "from": {
-            "pointing_button": "button1",
+            "key_code": "tab",
             "modifiers": {
               "mandatory": [
-                "control"
+                "command"
               ]
             }
           },
           "to": [
             {
-              "pointing_button": "button1",
+              "key_code": "right_arrow",
               "modifiers": [
-                "command"
+                "command",
+                "option"
               ]
             }
           ],
@@ -1147,18 +1148,20 @@
         {
           "type": "basic",
           "from": {
-            "pointing_button": "button1",
+            "key_code": "tab",
             "modifiers": {
               "mandatory": [
-                "command"
+                "command",
+                "shift"
               ]
             }
           },
           "to": [
             {
-              "pointing_button": "button1",
+              "key_code": "left_arrow",
               "modifiers": [
-                "control"
+                "command",
+                "option"
               ]
             }
           ],
@@ -1176,7 +1179,38 @@
       ]
     },
     {
-      "description": "Change command-control h/j/k/l to arrow keys",
+      "description": "Microsoft Office (ctrl-h)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": [
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "delete_or_backspace"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.microsoft\\.Word$",
+                "^com\\.microsoft\\.Powerpoint$",
+                "^com\\.microsoft\\.Excel$"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Change cmd-ctrl-h/j/k/l to arrow keys",
       "manipulators": [
         {
           "type": "basic",
@@ -1249,7 +1283,190 @@
       ]
     },
     {
-      "description": "Misison Control (control-command-shift + h/l to move to left/right desctop",
+      "description": "Misison Control (ctrl-cmd-shift + h/l to move to left/right desctop",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "command",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_arrow",
+              "modifiers": [
+                "control"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "command",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": [
+                "control"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Browser: Swap ctrl-left click and cmd-left click (Not working)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button1",
+            "modifiers": {
+              "mandatory": [
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "pointing_button": "button1",
+              "modifiers": [
+                "command"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^org\\.mozilla\\.firefox$",
+                "^com\\.google\\.Chrome$",
+                "^com\\.apple\\.Safari$"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button1",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "pointing_button": "button1",
+              "modifiers": [
+                "control"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^org\\.mozilla\\.firefox$",
+                "^com\\.google\\.Chrome$",
+                "^com\\.apple\\.Safari$"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Change cmd-ctrl-h/j/k/l to arrow keys",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_arrow"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "down_arrow"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "k",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "up_arrow"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Misison Control (ctrl-cmd-shift-h/l to move to left/right desctop",
       "manipulators": [
         {
           "type": "basic",

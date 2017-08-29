@@ -20,7 +20,7 @@
       %>
     },
     {
-      "description": "Copy and Paste, Control +z/x/c/v to Command +z/x/c/v",
+      "description": "Copy and Paste, ctrl-z/x/c/v to cmd-z/x/c/v",
       "manipulators":
       <%=
         manipulators = each_key(
@@ -41,10 +41,64 @@
       %>
     },
     {
+      "description": "For browsers (cmd-(shift-)tab to cmd-opt-right(left))",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": <%= from("tab", ["command"]) %>,
+          "to": <%= to([["right_arrow", ["command", "option"]]]) %>,
+          "conditions": [ <%= frontmost_application_if("browser") %> ]
+        },
+        {
+          "type": "basic",
+          "from": <%= from("tab", ["command", "shift"]) %>,
+          "to": <%= to([["left_arrow", ["command", "option"]]]) %>,
+          "conditions": [ <%= frontmost_application_if("browser") %> ]
+        }
+      ]
+    },
+    {
+      "description": "Microsoft Office (ctrl-h)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": <%= from("h", ["control"]) %>,
+          "to": <%= to([["delete_or_backspace"]]) %>,
+          "conditions": [ <%= frontmost_application_if("office") %> ]
+        }
+      ]
+    },
+    {
+      "description": "Change cmd-ctrl-h/j/k/l to arrow keys",
+      "manipulators":
+      <%=
+        each_key(
+          source_keys_list: ["h", "j", "k", "l"],
+          dest_keys_list: ["left_arrow", "down_arrow", "up_arrow", "right_arrow"],
+          from_mandatory_modifiers: ["control", "command"],
+          as_json: true
+        )
+      %>
+    },
+    {
+      "description": "Misison Control (ctrl-cmd-shift + h/l to move to left/right desctop",
+      "manipulators":
+      <%=
+        each_key(
+          source_keys_list: ["h", "l"],
+          dest_keys_list: ["left_arrow", "right_arrow"],
+          from_mandatory_modifiers: ["control", "command", "shift"],
+          to_modifiers: ["control"],
+          as_json: true
+        )
+      %>
+    },
+    {
       <%# -------------------------------------------------- %>
       <%# Not working (pointing_button is working as in mouse cursor move part... %>
+      <%# Done by BetterTouchTool for now %>
       <%# -------------------------------------------------- %>
-      "description": "Browser: Swap Control + left click and Command + left click",
+      "description": "Browser: Swap ctrl-left click and cmd-left click (Not working)",
       "manipulators": [
         {
           "type": "basic",
@@ -61,7 +115,7 @@
       ]
     },
     {
-      "description": "Change command-control h/j/k/l to arrow keys",
+      "description": "Change cmd-ctrl-h/j/k/l to arrow keys",
       "manipulators":
       <%=
         each_key(
@@ -73,7 +127,7 @@
       %>
     },
     {
-      "description": "Misison Control (control-command-shift + h/l to move to left/right desctop",
+      "description": "Misison Control (ctrl-cmd-shift-h/l to move to left/right desctop",
       "manipulators":
       <%=
         each_key(

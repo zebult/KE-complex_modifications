@@ -181,6 +181,16 @@ def frontmost_application(type, app_aliases, as_json=true)
     '^org\.macports\.X11$',
   ]
 
+  word_bundle_identifiers = [
+    '^com\.microsoft\.Word$'
+  ]
+  powerpoint_bundle_identifers = [
+    '^com\.microsoft\.Powerpoint$'
+  ]
+  excel_bundle_identifers = [
+    '^com\.microsoft\.Excel$'
+  ]
+
   # ----------------------------------------
 
   bundle_identifiers = []
@@ -219,6 +229,20 @@ def frontmost_application(type, app_aliases, as_json=true)
 
     when 'browser'
       bundle_identifiers.concat(browser_bundle_identifiers)
+
+    when 'word'
+      bundle_identifiers.concat(word_bundle_identifiers)
+
+    when 'powerpoint'
+      bundle_identifiers.concat(powerpoint_bundle_identifers)
+
+    when 'excel'
+      bundle_identifiers.concat(excel_bundle_identifers)
+
+    when 'office'
+      bundle_identifiers.concat(word_bundle_identifiers)
+      bundle_identifiers.concat(powerpoint_bundle_identifers)
+      bundle_identifiers.concat(excel_bundle_identifers)
 
     else
       $stderr << "unknown app_alias: #{app_alias}\n"
