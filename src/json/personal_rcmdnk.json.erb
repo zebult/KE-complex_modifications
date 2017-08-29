@@ -2,7 +2,7 @@
   "title": "Personal rules (@rcmdnk)",
   "rules": [
     {
-      "description": "For HHK (Esc to `(~))",
+      "description": "For HHKB (Esc to `(~))",
       "manipulators": [
         {
           "type": "basic",
@@ -15,6 +15,16 @@
           "from": <%= from("escape", ["shift"]) %>,
           "to": <%= to([["grave_accent_and_tilde", ["shift"]]]) %>,
           "conditions": [ <%= device_if("hhkb") %> ]
+        }
+      ]
+    },
+    {
+      "description": "Control-[ to ESC",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": <%= from("open_bracket", ["control"]) %>,
+          "to": <%= to([["escape", []]]) %>
         }
       ]
     },
@@ -79,7 +89,7 @@
       %>
     },
     {
-      "description": "For browsers (cmd-(shift-)tab to cmd-opt-right(left))",
+      "description": "Browsers (cmd-(shift-)tab to cmd-opt-right(left))",
       "manipulators": [
         {
           "type": "basic",
@@ -96,7 +106,7 @@
       ]
     },
     {
-      "description": "Microsoft Office (ctrl-h, font, upper/lower)",
+      "description": "Microsoft Office (ctrl-h, font, superscript/subscript)",
       "manipulators": [
         <%# ctrl-h %>
         {
@@ -119,7 +129,7 @@
           "to": <%= to([["t", ["command"]], ["tab"], ["h"], ["e"], ["l"], ["v"], ["e"], ["t"], ["i"], ["c"], ["a"], ["return_or_enter"]]) %>,
           "conditions": [ <%= frontmost_application_if("office") %> ]
         },
-        <%# Upper %>
+        <%# Superscript %>
         {
           "type": "basic",
           "from": <%= from("equal_sign", ["control"]) %>,
@@ -128,7 +138,7 @@
                         ["spacebar"], ["return_or_enter"]]) %>,
           "conditions": [ <%= frontmost_application_if("office") %> ]
         },
-        <%# Lower %>
+        <%# Subscript %>
         {
           "type": "basic",
           "from": <%= from("hyphen", ["control"]) %>,
@@ -152,27 +162,6 @@
       %>
     },
     {
-      <%# -------------------------------------------------- %>
-      <%# Not working (pointing_button is working as in mouse cursor move part... %>
-      <%# Done by BetterTouchTool for now %>
-      <%# -------------------------------------------------- %>
-      "description": "Browser: Swap ctrl-left click and cmd-left click (Not working)",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": <%= from_button("button1", ["control"]) %>,
-          "to": <%= to_button([["button1", ["command"]]]) %>,
-          "conditions": [ <%= frontmost_application_if("browser") %> ]
-        },
-        {
-          "type": "basic",
-          "from": <%= from_button("button1", ["command"]) %>,
-          "to": <%= to_button([["button1", ["control"]]]) %>,
-          "conditions": [ <%= frontmost_application_if("browser") %> ]
-        }
-      ]
-    },
-    {
       "description": "Change cmd-ctrl-h/j/k/l to arrow keys",
       "manipulators":
       <%=
@@ -180,19 +169,6 @@
           source_keys_list: ["h", "j", "k", "l"],
           dest_keys_list: ["left_arrow", "down_arrow", "up_arrow", "right_arrow"],
           from_mandatory_modifiers: ["control", "command"],
-          as_json: true
-        )
-      %>
-    },
-    {
-      "description": "Misison Control (ctrl-cmd-shift-h/l to move to left/right desctop",
-      "manipulators":
-      <%=
-        each_key(
-          source_keys_list: ["h", "l"],
-          dest_keys_list: ["left_arrow", "right_arrow"],
-          from_mandatory_modifiers: ["control", "command", "shift"],
-          to_modifiers: ["control"],
           as_json: true
         )
       %>
@@ -212,10 +188,10 @@
             ["u", ["control", "shift"], "windowMoveDown"],
             ["i", ["control", "shift"], "windowMoveUp"],
             ["o", ["control", "shift"], "windowMoveRight"],
-            ["y", ["command", "shift", "control"], "winMoveScreenLeft"],
-            ["u", ["command", "shift", "control"], "winMoveScreenDown"],
-            ["i", ["command", "shift", "control"], "winMoveScreenUp"],
-            ["o", ["command", "shift", "control"], "winMoveScreenRight"],
+            ["y", ["command", "control", "shift"], "winMoveScreenLeft"],
+            ["u", ["command", "control", "shift"], "winMoveScreenDown"],
+            ["i", ["command", "control", "shift"], "winMoveScreenUp"],
+            ["o", ["command", "control", "shift"], "winMoveScreenRight"],
             ["return_or_enter", ["command", "control"], "wsFull"],
             ["return_or_enter", ["command", "shift"], "wsFull"],
             ["return_or_enter", ["command", "control", "shift"], "wsHalf"],
@@ -282,14 +258,8 @@
       ]
     },
     {
-      "description": "Others (Esc, Dock, Sleep, Delete, IME, Misison Control)",
+      "description": "Others (Dock, Sleep, Delete, IME, Misison Control)",
       "manipulators": [
-        <%# ctrl-[ to ESC %>
-        {
-          "type": "basic",
-          "from": <%= from("open_bracket", ["control"]) %>,
-          "to": <%= to([["escape"]]) %>
-        },
         <%# Focus on Dock %>
         {
           "type": "basic",

@@ -2,7 +2,7 @@
   "title": "Personal rules (@rcmdnk)",
   "rules": [
     {
-      "description": "For HHK (Esc to `(~)",
+      "description": "For HHKB (Esc to `(~))",
       "manipulators": [
         {
           "type": "basic",
@@ -53,6 +53,30 @@
                 {
                   "vendor_id": 2131
                 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Control-[ to ESC",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "open_bracket",
+            "modifiers": {
+              "mandatory": [
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "escape",
+              "modifiers": [
+
               ]
             }
           ]
@@ -1412,7 +1436,7 @@
       ]
     },
     {
-      "description": "For browsers (cmd-(shift-)tab to cmd-opt-right(left))",
+      "description": "Browsers (cmd-(shift-)tab to cmd-opt-right(left))",
       "manipulators": [
         {
           "type": "basic",
@@ -1478,7 +1502,7 @@
       ]
     },
     {
-      "description": "Microsoft Office (ctrl-h, font, upper/lower)",
+      "description": "Microsoft Office (ctrl-h, font, superscript/subscript)",
       "manipulators": [
         {
           "type": "basic",
@@ -1834,69 +1858,6 @@
       ]
     },
     {
-      "description": "Browser: Swap ctrl-left click and cmd-left click (Not working)",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "pointing_button": "button1",
-            "modifiers": {
-              "mandatory": [
-                "control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "pointing_button": "button1",
-              "modifiers": [
-                "command"
-              ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^org\\.mozilla\\.firefox$",
-                "^com\\.google\\.Chrome$",
-                "^com\\.apple\\.Safari$"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "pointing_button": "button1",
-            "modifiers": {
-              "mandatory": [
-                "command"
-              ]
-            }
-          },
-          "to": [
-            {
-              "pointing_button": "button1",
-              "modifiers": [
-                "control"
-              ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^org\\.mozilla\\.firefox$",
-                "^com\\.google\\.Chrome$",
-                "^com\\.apple\\.Safari$"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
       "description": "Change cmd-ctrl-h/j/k/l to arrow keys",
       "manipulators": [
         {
@@ -1964,53 +1925,6 @@
           "to": [
             {
               "key_code": "right_arrow"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "description": "Misison Control (ctrl-cmd-shift-h/l to move to left/right desctop",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "h",
-            "modifiers": {
-              "mandatory": [
-                "control",
-                "command",
-                "shift"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "left_arrow",
-              "modifiers": [
-                "control"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "l",
-            "modifiers": {
-              "mandatory": [
-                "control",
-                "command",
-                "shift"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "right_arrow",
-              "modifiers": [
-                "control"
-              ]
             }
           ]
         }
@@ -2192,8 +2106,8 @@
             "modifiers": {
               "mandatory": [
                 "command",
-                "shift",
-                "control"
+                "control",
+                "shift"
               ]
             }
           },
@@ -2210,8 +2124,8 @@
             "modifiers": {
               "mandatory": [
                 "command",
-                "shift",
-                "control"
+                "control",
+                "shift"
               ]
             }
           },
@@ -2228,8 +2142,8 @@
             "modifiers": {
               "mandatory": [
                 "command",
-                "shift",
-                "control"
+                "control",
+                "shift"
               ]
             }
           },
@@ -2246,8 +2160,8 @@
             "modifiers": {
               "mandatory": [
                 "command",
-                "shift",
-                "control"
+                "control",
+                "shift"
               ]
             }
           },
@@ -2572,24 +2486,8 @@
       ]
     },
     {
-      "description": "Others (Esc, Dock, Sleep, Delete, IME, Misison Control)",
+      "description": "Others (Dock, Sleep, Delete, IME, Misison Control)",
       "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "open_bracket",
-            "modifiers": {
-              "mandatory": [
-                "control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "escape"
-            }
-          ]
-        },
         {
           "type": "basic",
           "from": {
