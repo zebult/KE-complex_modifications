@@ -2,7 +2,13 @@
   "title": "Personal rules (@rcmdnk)",
   "rules": [
     {
-      "description": "For HHKB (Esc to `(~))",
+      "description": "For HHKB ((Shift-)Esc to grave accent (tilde))",
+      "extra_descriptions": [
+        "Only for HHKB (vendor id = 2131).",
+        "And only for terminal, vim, emacs.",
+        "As HHKB's ESC is place for &#096; (gravce accent (back quote)) and ~ (tilde) at other keyboards.",
+        "Better to bind Control-[ to ESC as in below setting."
+      ],
       "manipulators": [
         {
           "type": "basic",
@@ -137,6 +143,10 @@
     },
     {
       "description": "iTerm2 command (Meta) keys",
+      "extra_description_level": 1,
+      "extra_descriptions": [
+        "Command to Option (i.e. Meta key) for other than n, v, w."
+      ],
       "manipulators": [
         {
           "type": "basic",
@@ -763,6 +773,11 @@
     },
     {
       "description": "ESC (or Control-[) sends ESC EISU ESC",
+      "extra_descriptions": [
+        "For terminal, vim, emacs.",
+        "Send ESC, EISU and ESC to stop changing at IME, disable IME and change to Normal mode at Vim at once.",
+        "Need to disable ESC at copy mode if GNU screen is used. Add following line in your .screenrc to disable ESC at copy mode:<br><code>bindkey -m ^[ eval ''</code>"
+      ],
       "manipulators": [
         {
           "type": "basic",
@@ -887,6 +902,10 @@
     },
     {
       "description": "Copy and Paste, ctrl-z/x/c/v to cmd-z/x/c/v",
+      "extra_descriptions": [
+        "For other than terminal, vim, emacs.",
+        "Copy and Paste with control key."
+      ],
       "manipulators": [
         {
           "type": "basic",
@@ -1372,6 +1391,9 @@
     },
     {
       "description": "Next/Prev by ctrl-i/o, option-left/right arrow",
+      "extra_descriptions": [
+        "For other than terminal, vim, emacs."
+      ],
       "manipulators": [
         {
           "type": "basic",
@@ -1613,6 +1635,9 @@
     },
     {
       "description": "Browsers (cmd-(shift-)tab to cmd-opt-right(left))",
+      "extra_descriptions": [
+        "For Firefox, Chrome, Safari."
+      ],
       "manipulators": [
         {
           "type": "basic",
@@ -1679,6 +1704,9 @@
     },
     {
       "description": "Microsoft Office (ctrl-h, font, superscript/subscript)",
+      "extra_descriptions": [
+        "For Microsoft Office (Word, PowerPoint, Excel)."
+      ],
       "manipulators": [
         {
           "type": "basic",
@@ -1962,6 +1990,9 @@
     },
     {
       "description": "Change cmd-ctrl-h/j/k/l to arrow keys",
+      "extra_descriptions": [
+        "Vim like move."
+      ],
       "manipulators": [
         {
           "type": "basic",
@@ -2035,6 +2066,10 @@
     },
     {
       "description": "Window Actions",
+      "extra_descriptions": [
+        "Window actions with AppleScript.",
+        "Need [rcmdnk/AppleScript](https://github.com/rcmdnk/AppleScript) to be installed."
+      ],
       "manipulators": [
         {
           "type": "basic",
@@ -2466,6 +2501,10 @@
     },
     {
       "description": "Mouse cursor move",
+      "extra_descriptions": [
+        "Need [rcmdnk/AppleScript](https://github.com/rcmdnk/AppleScript) to be installed.",
+        "Need to enable Mouse Key from System Preferences&rarr;Accessibility&rarr;Mouse and Trackpad."
+      ],
       "manipulators": [
         {
           "type": "basic",

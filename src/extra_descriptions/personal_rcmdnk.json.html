@@ -1,23 +1,24 @@
 <p style="margin-top: 20px; font-weight: bold">
-  For HHKB (Esc to grave accent and tilde)
+  For HHKB ((Shift-)Esc to grave accent (tilde))
 </p>
 
 <ul>
   <li>Only for HHKB (vendor id = 2131).</li>
   <li>And only for terminal, vim, emacs.</li>
-  <li>As HHKB's ESC is place for them at normal keyboard.</li>
-  <li>Need to map Control-[ to ESC as in below setting.</li>
+  <li>As HHKB's ESC is place for &#096; (gravce accent (back quote)) and ~ (tilde) at other keyboards.</li>
+  <li>Better to bind Control-[ to ESC as in below setting.</li>
 </ul>
 
+
 <table class="table">
-  <caption>Key bindings</caption>
+  <captions>Key bindings</captions>
   <tr>
-    <td>ESC</td>
-    <td>&#96; (Grave accent)</td>
+    <td>escape</td>
+    <td>grave_accent_and_tilde</td>
   </tr>
   <tr>
-    <td>Shift-ESC</td>
-    <td>~ (Tilde)</td>
+    <td>shift-escape</td>
+    <td>shift-grave_accent_and_tilde</td>
   </tr>
 </table>
 
@@ -26,28 +27,33 @@
 </p>
 
 <ul>
-  <li>Only for iTerm2.</li>
   <li>Command to Option (i.e. Meta key) for other than n, v, w.</li>
 </ul>
 
+
+
 <p style="margin-top: 20px; font-weight: bold">
-  ESC (or Control-[) send ESC EISU ESC
+  ESC (or Control-[) sends ESC EISU ESC
 </p>
 
 <ul>
-  <li>For terminal, vim, emacs</li>
+  <li>For terminal, vim, emacs.</li>
   <li>Send ESC, EISU and ESC to stop changing at IME, disable IME and change to Normal mode at Vim at once.</li>
-  <li>Need to disable ESC at copy mode if GNU screen is used.</li>
-  <ul>
-    <li> Add following line in your .screenrc to disable ESC at copy mode:<br>
-<code>bindkey -m ^[ eval ''</code>
-  </ul>
-  <li>Key bindings:</li>
-  <ul>
-    <li>ESC : ESC, EISU, ESC
-    <li>Control-[ : ESC, EISU, ESC
-  </ul>
+  <li>Need to disable ESC at copy mode if GNU screen is used. Add following line in your .screenrc to disable ESC at copy mode:<br><code>bindkey -m ^[ eval ''</code></li>
 </ul>
+
+
+<table class="table">
+  <captions>Key bindings</captions>
+  <tr>
+    <td>escape</td>
+    <td>escape, japanese_eisuu, escape</td>
+  </tr>
+  <tr>
+    <td>control-open_bracket</td>
+    <td>escape, japanese_eisuu, escape</td>
+  </tr>
+</table>
 
 <p style="margin-top: 20px; font-weight: bold">
   Copy and Paste, ctrl-z/x/c/v to cmd-z/x/c/v
@@ -56,14 +62,44 @@
 <ul>
   <li>For other than terminal, vim, emacs.</li>
   <li>Copy and Paste with control key.</li>
-  <li>Key bindings:</li>
-  <ul>
-    <li>Control-Z : Command-Z
-    <li>Control-X : Command-X
-    <li>Control-C : Command-C
-    <li>Control-V : Command-V
-  </ul>
 </ul>
+
+
+<table class="table">
+  <captions>Key bindings</captions>
+  <tr>
+    <td>control-z</td>
+    <td>command-z</td>
+  </tr>
+  <tr>
+    <td>control-x</td>
+    <td>command-x</td>
+  </tr>
+  <tr>
+    <td>control-c</td>
+    <td>command-c</td>
+  </tr>
+  <tr>
+    <td>control-v</td>
+    <td>command-v</td>
+  </tr>
+  <tr>
+    <td>shift-control-z</td>
+    <td>shift-command-z</td>
+  </tr>
+  <tr>
+    <td>shift-control-x</td>
+    <td>shift-command-x</td>
+  </tr>
+  <tr>
+    <td>shift-control-c</td>
+    <td>shift-command-c</td>
+  </tr>
+  <tr>
+    <td>shift-control-v</td>
+    <td>shift-command-v</td>
+  </tr>
+</table>
 
 <p style="margin-top: 20px; font-weight: bold">
   Next/Prev by ctrl-i/o, option-left/right arrow
@@ -71,14 +107,28 @@
 
 <ul>
   <li>For other than terminal, vim, emacs.</li>
-  <li>Key bindings:</li>
-  <ul>
-    <li>Control-I : Command-] (Next Page)</li>
-    <li>Control-O : Command-[ (Prev Page)</li>
-    <li>Option-Left_Arrow : Command-] (Next Page)</li>
-    <li>Option-Right_Arrow : Command-[ (Prev Page)</li>
-  </ul>
 </ul>
+
+
+<table class="table">
+  <captions>Key bindings</captions>
+  <tr>
+    <td>control-i</td>
+    <td>command-close_bracket</td>
+  </tr>
+  <tr>
+    <td>control-o</td>
+    <td>command-open_bracket</td>
+  </tr>
+  <tr>
+    <td>option-right_arrow</td>
+    <td>command-close_bracket</td>
+  </tr>
+  <tr>
+    <td>option-left_arrow</td>
+    <td>command-open_bracket</td>
+  </tr>
+</table>
 
 <p style="margin-top: 20px; font-weight: bold">
   Browsers (cmd-(shift-)tab to cmd-opt-right(left))
@@ -86,15 +136,20 @@
 
 <ul>
   <li>For Firefox, Chrome, Safari.</li>
-  <li>Key bindings:</li>
-  <ul>
-    <li>Command-Tab : Command-Option-Right_Arrow.</li>
-    <li>Command-Shift-Tab : Command-Option-Right_Arrow.</li>
-    <li>Control-O : Command-[ (Prev Page)</li>
-    <li>Option-Left_Arrow : Command-] (Next Page)</li>
-    <li>Option-Right_Arrow : Command-[ (Prev Page)</li>
-  </ul>
 </ul>
+
+
+<table class="table">
+  <captions>Key bindings</captions>
+  <tr>
+    <td>command-tab</td>
+    <td>command-option-right_arrow</td>
+  </tr>
+  <tr>
+    <td>command-shift-tab</td>
+    <td>command-option-left_arrow</td>
+  </tr>
+</table>
 
 <p style="margin-top: 20px; font-weight: bold">
   Microsoft Office (ctrl-h, font, superscript/subscript)
@@ -102,15 +157,32 @@
 
 <ul>
   <li>For Microsoft Office (Word, PowerPoint, Excel).</li>
-  <li>Key bindings:</li>
-  <ul>
-    <li>Control-H : Backspace.</li>
-    <li>Control-Command-Shift-S : Change font to Symbol.</li>
-    <li>Control-Command-Shift-H : Change font to Helvetica.</li>
-    <li>Control-= (equal) : Change to superscript.</li>
-    <li>Control-- (hyphen) : Change to subscript.</li>
-  </ul>
 </ul>
+
+
+<table class="table">
+  <captions>Key bindings</captions>
+  <tr>
+    <td>control-h</td>
+    <td>delete_or_backspace</td>
+  </tr>
+  <tr>
+    <td>control-command-shift-s</td>
+    <td>command-t, tab, s, y, m, b, o, l, return_or_enter</td>
+  </tr>
+  <tr>
+    <td>control-command-shift-h</td>
+    <td>command-t, tab, h, e, l, v, e, t, i, c, a, return_or_enter</td>
+  </tr>
+  <tr>
+    <td>control-equal_sign</td>
+    <td>command-t, tab, tab, tab, tab, tab, tab, tab, tab, tab, tab, spacebar, return_or_enter</td>
+  </tr>
+  <tr>
+    <td>control-hyphen</td>
+    <td>command-t, tab, tab, tab, tab, tab, tab, tab, tab, tab, tab, tab, spacebar, return_or_enter</td>
+  </tr>
+</table>
 
 <p style="margin-top: 20px; font-weight: bold">
   Change cmd-ctrl-h/j/k/l to arrow keys
@@ -118,14 +190,28 @@
 
 <ul>
   <li>Vim like move.</li>
-  <li>Key bindings:</li>
-  <ul>
-    <li>Command-Control-H : Left_Arrow.</li>
-    <li>Command-Control-J : Down_Arrow.</li>
-    <li>Command-Control-K : Up_Arrow.</li>
-    <li>Command-Control-L : Right_Arrow.</li>
-  </ul>
 </ul>
+
+
+<table class="table">
+  <captions>Key bindings</captions>
+  <tr>
+    <td>control-command-h</td>
+    <td>left_arrow</td>
+  </tr>
+  <tr>
+    <td>control-command-j</td>
+    <td>down_arrow</td>
+  </tr>
+  <tr>
+    <td>control-command-k</td>
+    <td>up_arrow</td>
+  </tr>
+  <tr>
+    <td>control-command-l</td>
+    <td>right_arrow</td>
+  </tr>
+</table>
 
 <p style="margin-top: 20px; font-weight: bold">
   Window Actions
@@ -134,34 +220,112 @@
 <ul>
   <li>Window actions with AppleScript.</li>
   <li>Need [rcmdnk/AppleScript](https://github.com/rcmdnk/AppleScript) to be installed.</li>
-  <li>Key bindings:</li>
-  <ul>
-    <li>Command-4 : Close the frontmost window.</li>
-    <li>Control-4 : Close the frontmost window.</li>
-    <li>Option-Space : Focus on Menu.</li>
-    <li>Option-Period : Move frontmost window to the proper place.</li>
-    <li>Command-Shift-Slash : Move all windows to the proper place.</li>
-    <li>Control-Shift-Y : Move window left.</li>
-    <li>Control-Shift-U : Move window down.</li>
-    <li>Control-Shift-K : Move window up.</li>
-    <li>Control-Shift-L : Move window right.</li>
-    <li>Command-Control-Shift-Y : Move window to the left screen.</li>
-    <li>Command-Control-Shift-U : Move window to the lower screen.</li>
-    <li>Command-Control-Shift-K : Move window to the upper screen.</li>
-    <li>Command-Control-Shift-L : Move window to the right screen.</li>
-    <li>Command-Control-Return : Make window almost full screen.</li>
-    <li>Command-Shift-Return : Make window almost full screen.</li>
-    <li>Command-Control-Shift-Return : Make window ~0.7 of full screen.</li>
-    <li>Command-Shift-H : Make window left half.</li>
-    <li>Command-Shift-J : Make window bottom half.</li>
-    <li>Command-Shift-K : Make window top half.</li>
-    <li>Command-Shift-L : Make window right half.</li>
-    <li>Command-Shift-Y : Reduce window width.</li>
-    <li>Command-Shift-U : Increase window height.</li>
-    <li>Command-Shift-I : Reduce window height.</li>
-    <li>Command-Shift-O : Increase window width.</li>
-  </ul>
 </ul>
+
+
+<table class="table">
+  <captions>Key bindings</captions>
+  <tr>
+    <td>command-4</td>
+    <td>shell_command: osascript ~/Library/Scripts/close.scpt</td>
+  </tr>
+  <tr>
+    <td>control-4</td>
+    <td>shell_command: osascript ~/Library/Scripts/close.scpt</td>
+  </tr>
+  <tr>
+    <td>control-command-a</td>
+    <td>shell_command: osascript ~/Library/Scripts/closeToDock.scpt</td>
+  </tr>
+  <tr>
+    <td>option-spacebar</td>
+    <td>shell_command: osascript ~/Library/Scripts/focusMenu.scpt</td>
+  </tr>
+  <tr>
+    <td>option-period</td>
+    <td>shell_command: osascript ~/Library/Scripts/moveForMon.scpt</td>
+  </tr>
+  <tr>
+    <td>command-shift-slash</td>
+    <td>shell_command: osascript ~/Library/Scripts/moveForMonAll.scpt</td>
+  </tr>
+  <tr>
+    <td>control-shift-y</td>
+    <td>shell_command: osascript ~/Library/Scripts/windowMoveLeft.scpt</td>
+  </tr>
+  <tr>
+    <td>control-shift-u</td>
+    <td>shell_command: osascript ~/Library/Scripts/windowMoveDown.scpt</td>
+  </tr>
+  <tr>
+    <td>control-shift-i</td>
+    <td>shell_command: osascript ~/Library/Scripts/windowMoveUp.scpt</td>
+  </tr>
+  <tr>
+    <td>control-shift-o</td>
+    <td>shell_command: osascript ~/Library/Scripts/windowMoveRight.scpt</td>
+  </tr>
+  <tr>
+    <td>command-control-shift-y</td>
+    <td>shell_command: osascript ~/Library/Scripts/winMoveScreenLeft.scpt</td>
+  </tr>
+  <tr>
+    <td>command-control-shift-u</td>
+    <td>shell_command: osascript ~/Library/Scripts/winMoveScreenDown.scpt</td>
+  </tr>
+  <tr>
+    <td>command-control-shift-i</td>
+    <td>shell_command: osascript ~/Library/Scripts/winMoveScreenUp.scpt</td>
+  </tr>
+  <tr>
+    <td>command-control-shift-o</td>
+    <td>shell_command: osascript ~/Library/Scripts/winMoveScreenRight.scpt</td>
+  </tr>
+  <tr>
+    <td>command-control-return_or_enter</td>
+    <td>shell_command: osascript ~/Library/Scripts/wsFull.scpt</td>
+  </tr>
+  <tr>
+    <td>command-shift-return_or_enter</td>
+    <td>shell_command: osascript ~/Library/Scripts/wsFull.scpt</td>
+  </tr>
+  <tr>
+    <td>command-control-shift-return_or_enter</td>
+    <td>shell_command: osascript ~/Library/Scripts/wsHalf.scpt</td>
+  </tr>
+  <tr>
+    <td>command-shift-h</td>
+    <td>shell_command: osascript ~/Library/Scripts/wsHalfLeft.scpt</td>
+  </tr>
+  <tr>
+    <td>command-shift-j</td>
+    <td>shell_command: osascript ~/Library/Scripts/wsHalfBottom.scpt</td>
+  </tr>
+  <tr>
+    <td>command-shift-k</td>
+    <td>shell_command: osascript ~/Library/Scripts/wsHalfTop.scpt</td>
+  </tr>
+  <tr>
+    <td>command-shift-l</td>
+    <td>shell_command: osascript ~/Library/Scripts/wsHalfRight.scpt</td>
+  </tr>
+  <tr>
+    <td>command-shift-y</td>
+    <td>shell_command: osascript ~/Library/Scripts/windowResizeWidthMinus.scpt</td>
+  </tr>
+  <tr>
+    <td>command-shift-u</td>
+    <td>shell_command: osascript ~/Library/Scripts/windowResizeHeightPlus.scpt</td>
+  </tr>
+  <tr>
+    <td>command-shift-i</td>
+    <td>shell_command: osascript ~/Library/Scripts/windowResizeHeightMinus.scpt</td>
+  </tr>
+  <tr>
+    <td>command-shift-o</td>
+    <td>shell_command: osascript ~/Library/Scripts/windowResizeWidthPlus.scpt</td>
+  </tr>
+</table>
 
 <p style="margin-top: 20px; font-weight: bold">
   Mouse cursor move
@@ -170,44 +334,98 @@
 <ul>
   <li>Need [rcmdnk/AppleScript](https://github.com/rcmdnk/AppleScript) to be installed.</li>
   <li>Need to enable Mouse Key from System Preferences&rarr;Accessibility&rarr;Mouse and Trackpad.</li>
-  <li>Key bindings:</li>
-  <ul>
-    <li>Control-Shift-H : Move cursor left.</li>
-    <li>Control-Shift-J : Move cursor down.</li>
-    <li>Control-Shift-K : Move cursor up.</li>
-    <li>Control-Shift-L : Move cursor right.</li>
-    <li>Control-Shift-N : Left click.</li>
-    <li>Control-Shift-M : Middle click.</li>
-    <li>Control-Shift-P : Right click.</li>
-  </ul>
 </ul>
+
+
+<table class="table">
+  <captions>Key bindings</captions>
+  <tr>
+    <td>control-shift-h</td>
+    <td>shell_command: osascript ~/Library/Scripts/mouseMoveLeft.scpt</td>
+  </tr>
+  <tr>
+    <td>control-shift-j</td>
+    <td>shell_command: osascript ~/Library/Scripts/mouseMoveDown.scpt</td>
+  </tr>
+  <tr>
+    <td>control-shift-k</td>
+    <td>shell_command: osascript ~/Library/Scripts/mouseMoveUp.scpt</td>
+  </tr>
+  <tr>
+    <td>control-shift-l</td>
+    <td>shell_command: osascript ~/Library/Scripts/mouseMoveRight.scpt</td>
+  </tr>
+  <tr>
+    <td>control-shift-n</td>
+    <td>button1</td>
+  </tr>
+  <tr>
+    <td>control-shift-m</td>
+    <td>button3</td>
+  </tr>
+  <tr>
+    <td>control-shift-p</td>
+    <td>button2</td>
+  </tr>
+</table>
 
 <p style="margin-top: 20px; font-weight: bold">
   Control-[ to ESC
 </p>
 
-<ul>
-  <li>Key bindings:</li>
-  <ul>
-    <li>Control-[ : ESC everywhere.</li>
-  </ul>
-</ul>
+
+
+<table class="table">
+  <captions>Key bindings</captions>
+  <tr>
+    <td>control-open_bracket</td>
+    <td>escape</td>
+  </tr>
+</table>
 
 <p style="margin-top: 20px; font-weight: bold">
   Others (Dock, Sleep, Delete, IME, Misison Control, Spotlight)
 </p>
 
-<ul>
-  <li>Key bindings:</li>
-  <ul>
-    <li>Control-M : Control-F3 (Focus on Dock).</li>
-    <li>Option-L : Control-Shift-Eject (Sleep).</li>
-    <li>Command-D : Command-Delete (Delete selected file).</li>
-    <li>Control-Delete : Command-Delete (Delete selected file).</li>
-    <li>Control-Space : Control-Option-Space (Choose previous IME).</li>
-    <li>Command-Control-Shift-H : Move to the left space of Mission Control.</li>
-    <li>Command-Control-Shift-L : Move to the right space of Mission Control.</li>
-    <li>Command-Control-F : Command-Space (Launch spotlight).</li>
-  </ul>
-</ul>
+
+
+<table class="table">
+  <captions>Key bindings</captions>
+  <tr>
+    <td>control-m</td>
+    <td>control-f3</td>
+  </tr>
+  <tr>
+    <td>option-l</td>
+    <td>control-shift-eject</td>
+  </tr>
+  <tr>
+    <td>command-d</td>
+    <td>command-delete_or_backspace</td>
+  </tr>
+  <tr>
+    <td>control-delete_or_backspace</td>
+    <td>command-delete_or_backspace</td>
+  </tr>
+  <tr>
+    <td>control-spacebar</td>
+    <td>option-control-spacebar</td>
+  </tr>
+  <tr>
+    <td>command-spacebar</td>
+    <td>option-control-spacebar</td>
+  </tr>
+  <tr>
+    <td>command-control-shift-h</td>
+    <td>control-left_arrow</td>
+  </tr>
+  <tr>
+    <td>command-control-shift-l</td>
+    <td>control-right_arrow</td>
+  </tr>
+  <tr>
+    <td>command-control-f</td>
+    <td>command-spacebar</td>
+  </tr>
+</table>
 
