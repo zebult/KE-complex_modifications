@@ -3,106 +3,120 @@
 require 'erb'
 require 'json'
 
-def _from_data(mandatory_modifiers, optional_modifiers=[])
-  data = {}
+def deepcopy(data)
+  Marshal.load(Marshal.dump(data))
+end
 
+def to_array(data)
+  unless data.is_a? Array
+    data = [data]
+  end
+  data
+end
+
+def make_data(data, as_json=true)
+  if as_json
+    JSON.generate(data)
+  else
+    data
+  end
+end
+
+def key(data, key)
+  if key == "any"
+    data['any'] = "key_code"
+  elsif key.start_with?("button")
+    data['pointing_button'] = key
+  else
+    data['key_code'] = key
+  end
+end
+
+def from(key_code, mandatory_modifiers=[], optional_modifiers=[], as_json=true)
+  mandatory_modifiers = to_array(mandatory_modifiers)
+  optional_modifiers = to_array(optional_modifiers)
+
+  data = {}
+  key(data, key_code)
   mandatory_modifiers.each do |m|
     data['modifiers'] = {} if data['modifiers'].nil?
     data['modifiers']['mandatory'] = [] if data['modifiers']['mandatory'].nil?
     data['modifiers']['mandatory'] << m
   end
-
   optional_modifiers.each do |m|
     data['modifiers'] = {} if data['modifiers'].nil?
     data['modifiers']['optional'] = [] if data['modifiers']['optional'].nil?
     data['modifiers']['optional'] << m
   end
-  data
+  make_data(data, as_json)
 end
 
-def _from(key_code, mandatory_modifiers, optional_modifiers=[])
-  data = {}
-  data['key_code'] = key_code
-  data.merge!(_from_data(mandatory_modifiers, optional_modifiers))
-  data
+def hash_from(key_code, mandatory_modifiers=[], optional_modifiers=[])
+  from(key_code, mandatory_modifiers, optional_modifiers, false)
 end
 
-def from(key_code, mandatory_modifiers, optional_modifiers=[])
-  JSON.generate(_from(key_code, mandatory_modifiers, optional_modifiers))
-end
-
-def _from_button(button, mandatory_modifiers, optional_modifiers=[])
-  data = {}
-  data['pointing_button'] = button
-  data.merge!(_from_data(mandatory_modifiers, optional_modifiers))
-  data
-end
-
-def from_button(button, mandatory_modifiers, optional_modifiers=[])
-  JSON.generate(_from_button(button, mandatory_modifiers, optional_modifiers))
-end
-
-def _to(events)
+def to(events, as_json=true)
   data = []
-
   events.each do |e|
     d = {}
-    d['key_code'] = e[0]
-    unless e[1].nil?
-      d['modifiers'] = e[1]
+    if e.is_a? Array
+      key(d, e[0])
+      unless e[1].nil?
+        d['modifiers'] = e[1]
+      end
+    elsif e.is_a? String
+      key(d, e)
+    else
+      d = deepcopy(e)
     end
-
     data << d
   end
   data
+  make_data(data, as_json)
 end
 
-def to(events)
-  JSON.generate(_to(events))
+def hash_to(events)
+  to(events, false)
 end
-
-def _to_button(events)
-  data = []
-
-  events.each do |e|
-    d = {}
-    d['pointing_button'] = e[0]
-    unless e[1].nil?
-      d['modifiers'] = e[1]
-    end
-
-    data << d
-  end
-  data
-end
-
-def to_button(events)
-  JSON.generate(_to_button(events))
-end
-
 
 def each_key(source_keys_list: :source_keys_list, dest_keys_list: :dest_keys_list, from_mandatory_modifiers: [], from_optional_modifiers: [], to_pre_events: [], to_modifiers: [], to_post_events: [], conditions: [], as_json: false)
+  unless source_keys_list.is_a? Array
+    source_keys_list = [source_keys_list]
+    dest_keys_list = [dest_keys_list]
+  end
   data = []
-  source_keys_list.each_with_index do |from_key,index|
+  source_keys_list.each_with_index do |from_key, index|
     to_key = dest_keys_list[index]
     d = {}
     d['type'] = 'basic'
-    d['from'] = _from(from_key, from_mandatory_modifiers, from_optional_modifiers)
+    if from_key.is_a? String
+      d['from'] = from(from_key, from_mandatory_modifiers, from_optional_modifiers, false)
+    else
+      d['from'] = from_key
+    end
 
     # Compile list of events to add to "to" section
     events = []
     to_pre_events.each do |e|
       events << e
     end
-    if to_modifiers[0].nil?
-      events << [to_key]
+    if to_key.is_a? String
+      if to_modifiers[0].nil?
+        events << [to_key]
+      else
+        events << [to_key, to_modifiers]
+      end
+    elsif to_key.is_a? Array
+      to_key.each do |e|
+        events << e
+      end
     else
-      events << [to_key, to_modifiers]
+      events << to_key
     end
     to_post_events.each do |e|
       events << e
     end
-    d['to'] = JSON.parse(to(events))
+    d['to'] = hash_to(events)
 
     if conditions.any?
       d['conditions'] = []
@@ -113,11 +127,7 @@ def each_key(source_keys_list: :source_keys_list, dest_keys_list: :dest_keys_lis
     data << d
   end
 
-  if as_json
-    JSON.generate(data)
-  else
-    data
-  end
+  make_data(data, as_json)
 end
 
 def frontmost_application(type, app_aliases, as_json=true)
@@ -195,11 +205,7 @@ def frontmost_application(type, app_aliases, as_json=true)
 
   bundle_identifiers = []
 
-  unless app_aliases.is_a? Enumerable
-    app_aliases = [ app_aliases ]
-  end
-
-  app_aliases.each do |app_alias|
+  to_array(app_aliases).each do |app_alias|
     case app_alias
     when 'iterm2'
       bundle_identifiers.concat(iterm2_bundle_identifiers)
@@ -244,6 +250,17 @@ def frontmost_application(type, app_aliases, as_json=true)
       bundle_identifiers.concat(powerpoint_bundle_identifers)
       bundle_identifiers.concat(excel_bundle_identifers)
 
+    when 'vim_emu'
+      bundle_identifiers.concat(emacs_bundle_identifiers)
+      bundle_identifiers.concat(remote_desktop_bundle_identifiers)
+      bundle_identifiers.concat(terminal_bundle_identifiers)
+      bundle_identifiers.concat(vi_bundle_identifiers)
+      bundle_identifiers.concat(virtual_machine_bundle_identifiers)
+      bundle_identifiers.concat(x11_bundle_identifiers)
+      bundle_identifiers.concat(remote_desktop_bundle_identifiers)
+      bundle_identifiers.concat(virtual_machine_bundle_identifiers)
+      bundle_identifiers.concat(browser_bundle_identifiers)
+
     else
       $stderr << "unknown app_alias: #{app_alias}\n"
     end
@@ -254,11 +271,7 @@ def frontmost_application(type, app_aliases, as_json=true)
       "type" => type,
       "bundle_identifiers" => bundle_identifiers
     }
-    if as_json
-      JSON.generate(data)
-    else
-      data
-    end
+    make_data(data, as_json)
   end
 end
 
@@ -277,14 +290,10 @@ def device(type, device_aliases, as_json=true)
 
   ids = []
 
-  unless device_aliases.is_a? Enumerable
-    device_aliases = [ device_aliases ]
-  end
-
-  device_aliases.each do |device_alias|
+  to_array(device_aliases).each do |device_alias|
     case device_alias
     when 'hhkb'
-      ids.push(hhkb_id)
+      ids << hhkb_id
 
     else
       $stderr << "unknown hhkb_alias: #{device_aliases}\n"
@@ -296,11 +305,7 @@ def device(type, device_aliases, as_json=true)
       "type" => type,
       "identifiers" => ids
     }
-    if as_json
-      JSON.generate(data)
-    else
-      data
-    end
+    make_data(data, as_json)
   end
 end
 
@@ -310,6 +315,36 @@ end
 
 def device_unless(app_aliases, as_json=true)
   device('device_unless', device_aliases, as_json)
+end
+
+def vim_emu(source_keys_list: :source_keys_list, dest_keys_list: :dest_keys_list, from_mandatory_modifiers: [], from_optional_modifiers: [], to_pre_events: [], to_modifiers: [], to_post_events: [], conditions: "", as_json: false, mode: "normal")
+  mode = to_array(mode)
+  data = []
+  if conditions == ""
+    conditions = [
+      frontmost_application_unless("vim_emu",false)
+    ]
+  end
+  mode.each do |m|
+    conditions_vim_emu = deepcopy(conditions)
+    if m != ""
+      conditions_vim_emu += [
+        {"type": "variable_if", "name": "vim_emu_#{m}", "value": 1}
+      ]
+    end
+    data += each_key(
+      source_keys_list: source_keys_list,
+      dest_keys_list: dest_keys_list,
+      from_mandatory_modifiers: from_mandatory_modifiers,
+      from_optional_modifiers: from_optional_modifiers,
+      to_pre_events: to_pre_events,
+      to_modifiers: to_modifiers,
+      to_post_events: to_post_events,
+      conditions: conditions_vim_emu,
+      as_json: false
+    )
+  end
+  make_data(data, as_json)
 end
 
 template = ERB.new $stdin.read

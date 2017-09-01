@@ -1,0 +1,42 @@
+{
+  "title": "sticky",
+  "rules": [
+    {
+      "description": "sticky shift - shift modifier",
+      "manipulators":
+      <%=
+        manipulators = []
+
+        manipulators += each_key(
+          source_keys_list: "semicolon",
+          dest_keys_list: [],
+          to_post_events: [
+            {"set_variable": {"name": "sticky_a", "value": 1}}
+          ],
+          conditions: [{"type": "variable_if", "name": "sticky_a", "value": 0}]
+        )
+        keys = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+        manipulators += each_key(
+          source_keys_list: keys,
+          dest_keys_list: keys,
+          to_modifiers: ["shift"],
+          to_post_events: [
+            {"set_variable": {"name": "sticky_a", "value": 0}}
+          ],
+          conditions: [{"type": "variable_if", "name": "sticky_a", "value": 1}]
+        )
+
+        manipulators += each_key(
+          source_keys_list: "any",
+          dest_keys_list: "vk_none",
+          from_optional_modifiers: ["any"],
+          to_post_events: [
+            {"set_variable": {"name": "sticky_a", "value": 0}}
+          ],
+          conditions: [{"type": "variable_if", "name": "sticky_a", "value": 1}]
+        )
+        JSON.generate(manipulators)
+      %>
+    }
+  ]
+}

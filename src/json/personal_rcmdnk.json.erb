@@ -12,14 +12,8 @@
       "manipulators": [
         {
           "type": "basic",
-          "from": <%= from("escape", []) %>,
-          "to": <%= to([["grave_accent_and_tilde", []]]) %>,
-          "conditions": [ <%= device_if("hhkb") %>, <%= frontmost_application_if("emacs_key_bindings_exception") %> ]
-        },
-        {
-          "type": "basic",
-          "from": <%= from("escape", ["shift"]) %>,
-          "to": <%= to([["grave_accent_and_tilde", ["shift"]]]) %>,
+          "from": <%= from("escape", [], ["any"]) %>,
+          "to": <%= to([["grave_accent_and_tilde"]]) %>,
           "conditions": [ <%= device_if("hhkb") %>, <%= frontmost_application_if("emacs_key_bindings_exception") %> ]
         }
       ]
@@ -38,8 +32,9 @@
                      "m", "o", "p", "q", "r", "s", "t", "u", "x", "y", "z"]
         each_key(
           source_keys_list: iterm2Keys,
-          dest_keys_list: iterm2Keys,
           from_mandatory_modifiers: ["command"],
+          from_optional_modifiers: ["shift"],
+          dest_keys_list: iterm2Keys,
           to_modifiers: ["option"],
           conditions: [frontmost_application_if("iterm2", false)],
           as_json: true
@@ -53,20 +48,16 @@
         "Send ESC, EISU and ESC to stop changing at IME, disable IME and change to Normal mode at Vim at once.",
         "Need to disable ESC at copy mode if GNU screen is used. Add following line in your .screenrc to disable ESC at copy mode:<br><code>bindkey -m ^[ eval ''</code>"
       ],
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": <%= from("escape", []) %>,
-          "to": <%= to([["escape"], ["japanese_eisuu"], ["escape"]]) %>,
-          "conditions": [ <%= frontmost_application_if("emacs_key_bindings_exception") %> ]
-        },
-        {
-          "type": "basic",
-          "from": <%= from("open_bracket", ["control"]) %>,
-          "to": <%= to([["escape"], ["japanese_eisuu"], ["escape"]]) %>,
-          "conditions": [ <%= frontmost_application_if("emacs_key_bindings_exception") %> ]
-        }
-      ]
+      "manipulators":
+      <%=
+        each_key(
+          source_keys_list: ["escape", hash_from("open_bracket", ["control"])],
+          dest_keys_list: [[], []],
+          to_post_events: ["escape", "japanese_eisuu", "escape"],
+          conditions: [frontmost_application_if("emacs_key_bindings_exception", false)],
+          as_json: true
+        )
+      %>
     },
     {
       "description": "Copy and Paste, ctrl-z/x/c/v to cmd-z/x/c/v",
@@ -80,17 +71,11 @@
           source_keys_list: ["z", "x", "c", "v"],
           dest_keys_list: ["z", "x", "c", "v"],
           from_mandatory_modifiers: ["control"],
+          from_optional_modifiers: ["shift"],
           to_modifiers: ["command"],
-          conditions: [frontmost_application_unless("emacs_key_bindings_exception", false)]
+          conditions: [frontmost_application_unless("emacs_key_bindings_exception", false)],
+          as_json: true
         )
-        manipulators += each_key(
-          source_keys_list: ["z", "x", "c", "v"],
-          dest_keys_list: ["z", "x", "c", "v"],
-          from_mandatory_modifiers: ["shift", "control"],
-          to_modifiers: ["shift", "command"],
-          conditions: [frontmost_application_unless("emacs_key_bindings_exception", false)]
-        )
-        JSON.generate(manipulators)
       %>
     },
     {
@@ -256,40 +241,30 @@
         "Need [rcmdnk/AppleScript](https://github.com/rcmdnk/AppleScript) to be installed.",
         "Need to enable Mouse Key from System Preferences&rarr;Accessibility&rarr;Mouse and Trackpad."
       ],
-      "manipulators": [
-        <%=
-          mousekeys = [
-            ["h", ["control", "shift"], "mouseMoveLeft"],
-            ["j", ["control", "shift"], "mouseMoveDown"],
-            ["k", ["control", "shift"], "mouseMoveUp"],
-            ["l", ["control", "shift"], "mouseMoveRight"]
-          ]
-          manipulators = ""
-          for key in mousekeys do
-            manipulators += "{
-              \"type\": \"basic\",
-              \"from\": #{from(key[0], key[1])},
-              \"to\": [{\"shell_command\": \"osascript ~/Library/Scripts/#{key[2]}.scpt\"}]
-            },"
-          end
-          manipulators
-        %>
-        {
-          "type": "basic",
-          "from": <%= from("n", ["control", "shift"]) %>,
-          "to": <%= to_button([["button1"]]) %>
-        },
-        {
-          "type": "basic",
-          "from": <%= from("m", ["control", "shift"]) %>,
-          "to": <%= to_button([["button3"]]) %>
-        },
-        {
-          "type": "basic",
-          "from": <%= from("p", ["control", "shift"]) %>,
-          "to": <%= to_button([["button2"]]) %>
+      "manipulators":
+      <%=
+        mousekeys = {
+          "h"=>"mouseMoveLeft",
+          "j"=>"mouseMoveDown",
+          "k"=>"mouseMoveUp",
+          "l"=>"mouseMoveRight"
         }
-      ]
+        mousekeys.each do |k, v|
+          mousekeys[k] = {"shell_command": "osascript ~/Library/Scripts/#{v}.scpt"}
+        end
+
+        manipulators = each_key(
+          source_keys_list: mousekeys.keys,
+          from_mandatory_modifiers: ["control", "shift"],
+          dest_keys_list: mousekeys.values
+        )
+        manipulators += each_key(
+          source_keys_list: ["n", "m", "p"],
+          from_mandatory_modifiers: ["control", "shift"],
+          dest_keys_list: ["button1", "button3", "button2"]
+        )
+        JSON.generate(manipulators)
+      %>
     },
     {
       "description": "Control-[ to ESC",

@@ -13,81 +13,16 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "escape"
-          },
-          "to": [
-            {
-              "key_code": "grave_accent_and_tilde",
-              "modifiers": [
-
-              ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "device_if",
-              "identifiers": [
-                {
-                  "vendor_id": 2131
-                }
-              ]
-            },
-            {
-              "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^org\\.gnu\\.Emacs$",
-                "^org\\.gnu\\.AquamacsEmacs$",
-                "^org\\.gnu\\.Aquamacs$",
-                "^org\\.pqrs\\.unknownapp.conkeror$",
-                "^com\\.microsoft\\.rdc$",
-                "^com\\.microsoft\\.rdc\\.mac$",
-                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
-                "^net\\.sf\\.cord$",
-                "^com\\.thinomenon\\.RemoteDesktopConnection$",
-                "^com\\.itap-mobile\\.qmote$",
-                "^com\\.nulana\\.remotixmac$",
-                "^com\\.p5sys\\.jump\\.mac\\.viewer$",
-                "^com\\.p5sys\\.jump\\.mac\\.viewer\\.web$",
-                "^com\\.vmware\\.horizon$",
-                "^com\\.2X\\.Client\\.Mac$",
-                "^com\\.googlecode\\.iterm2$",
-                "^com\\.apple\\.Terminal$",
-                "^co\\.zeit\\.hyperterm$",
-                "^co\\.zeit\\.hyper$",
-                "^org\\.vim\\.",
-                "^com\\.vmware\\.fusion$",
-                "^com\\.vmware\\.horizon$",
-                "^com\\.vmware\\.view$",
-                "^com\\.parallels\\.desktop$",
-                "^com\\.parallels\\.vm$",
-                "^com\\.parallels\\.desktop\\.console$",
-                "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                "^com\\.vmware\\.proxyApp\\.",
-                "^com\\.parallels\\.winapp\\.",
-                "^org\\.x\\.X11$",
-                "^com\\.apple\\.x11$",
-                "^org\\.macosforge\\.xquartz\\.X11$",
-                "^org\\.macports\\.X11$"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
             "key_code": "escape",
             "modifiers": {
-              "mandatory": [
-                "shift"
+              "optional": [
+                "any"
               ]
             }
           },
           "to": [
             {
-              "key_code": "grave_accent_and_tilde",
-              "modifiers": [
-                "shift"
-              ]
+              "key_code": "grave_accent_and_tilde"
             }
           ],
           "conditions": [
@@ -155,6 +90,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -182,6 +120,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -209,6 +150,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -236,6 +180,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -263,6 +210,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -290,6 +240,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -317,6 +270,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -344,6 +300,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -371,6 +330,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -398,6 +360,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -425,6 +390,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -452,6 +420,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -479,6 +450,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -506,6 +480,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -533,6 +510,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -560,6 +540,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -587,6 +570,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -614,6 +600,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -641,6 +630,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -668,6 +660,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -695,6 +690,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -722,6 +720,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -749,6 +750,9 @@
             "modifiers": {
               "mandatory": [
                 "command"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -914,6 +918,9 @@
             "modifiers": {
               "mandatory": [
                 "control"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -973,6 +980,9 @@
             "modifiers": {
               "mandatory": [
                 "control"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -1032,6 +1042,9 @@
             "modifiers": {
               "mandatory": [
                 "control"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -1091,6 +1104,9 @@
             "modifiers": {
               "mandatory": [
                 "control"
+              ],
+              "optional": [
+                "shift"
               ]
             }
           },
@@ -1098,250 +1114,6 @@
             {
               "key_code": "v",
               "modifiers": [
-                "command"
-              ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_unless",
-              "bundle_identifiers": [
-                "^org\\.gnu\\.Emacs$",
-                "^org\\.gnu\\.AquamacsEmacs$",
-                "^org\\.gnu\\.Aquamacs$",
-                "^org\\.pqrs\\.unknownapp.conkeror$",
-                "^com\\.microsoft\\.rdc$",
-                "^com\\.microsoft\\.rdc\\.mac$",
-                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
-                "^net\\.sf\\.cord$",
-                "^com\\.thinomenon\\.RemoteDesktopConnection$",
-                "^com\\.itap-mobile\\.qmote$",
-                "^com\\.nulana\\.remotixmac$",
-                "^com\\.p5sys\\.jump\\.mac\\.viewer$",
-                "^com\\.p5sys\\.jump\\.mac\\.viewer\\.web$",
-                "^com\\.vmware\\.horizon$",
-                "^com\\.2X\\.Client\\.Mac$",
-                "^com\\.googlecode\\.iterm2$",
-                "^com\\.apple\\.Terminal$",
-                "^co\\.zeit\\.hyperterm$",
-                "^co\\.zeit\\.hyper$",
-                "^org\\.vim\\.",
-                "^com\\.vmware\\.fusion$",
-                "^com\\.vmware\\.horizon$",
-                "^com\\.vmware\\.view$",
-                "^com\\.parallels\\.desktop$",
-                "^com\\.parallels\\.vm$",
-                "^com\\.parallels\\.desktop\\.console$",
-                "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                "^com\\.vmware\\.proxyApp\\.",
-                "^com\\.parallels\\.winapp\\.",
-                "^org\\.x\\.X11$",
-                "^com\\.apple\\.x11$",
-                "^org\\.macosforge\\.xquartz\\.X11$",
-                "^org\\.macports\\.X11$"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "z",
-            "modifiers": {
-              "mandatory": [
-                "shift",
-                "control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "z",
-              "modifiers": [
-                "shift",
-                "command"
-              ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_unless",
-              "bundle_identifiers": [
-                "^org\\.gnu\\.Emacs$",
-                "^org\\.gnu\\.AquamacsEmacs$",
-                "^org\\.gnu\\.Aquamacs$",
-                "^org\\.pqrs\\.unknownapp.conkeror$",
-                "^com\\.microsoft\\.rdc$",
-                "^com\\.microsoft\\.rdc\\.mac$",
-                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
-                "^net\\.sf\\.cord$",
-                "^com\\.thinomenon\\.RemoteDesktopConnection$",
-                "^com\\.itap-mobile\\.qmote$",
-                "^com\\.nulana\\.remotixmac$",
-                "^com\\.p5sys\\.jump\\.mac\\.viewer$",
-                "^com\\.p5sys\\.jump\\.mac\\.viewer\\.web$",
-                "^com\\.vmware\\.horizon$",
-                "^com\\.2X\\.Client\\.Mac$",
-                "^com\\.googlecode\\.iterm2$",
-                "^com\\.apple\\.Terminal$",
-                "^co\\.zeit\\.hyperterm$",
-                "^co\\.zeit\\.hyper$",
-                "^org\\.vim\\.",
-                "^com\\.vmware\\.fusion$",
-                "^com\\.vmware\\.horizon$",
-                "^com\\.vmware\\.view$",
-                "^com\\.parallels\\.desktop$",
-                "^com\\.parallels\\.vm$",
-                "^com\\.parallels\\.desktop\\.console$",
-                "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                "^com\\.vmware\\.proxyApp\\.",
-                "^com\\.parallels\\.winapp\\.",
-                "^org\\.x\\.X11$",
-                "^com\\.apple\\.x11$",
-                "^org\\.macosforge\\.xquartz\\.X11$",
-                "^org\\.macports\\.X11$"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "x",
-            "modifiers": {
-              "mandatory": [
-                "shift",
-                "control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "x",
-              "modifiers": [
-                "shift",
-                "command"
-              ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_unless",
-              "bundle_identifiers": [
-                "^org\\.gnu\\.Emacs$",
-                "^org\\.gnu\\.AquamacsEmacs$",
-                "^org\\.gnu\\.Aquamacs$",
-                "^org\\.pqrs\\.unknownapp.conkeror$",
-                "^com\\.microsoft\\.rdc$",
-                "^com\\.microsoft\\.rdc\\.mac$",
-                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
-                "^net\\.sf\\.cord$",
-                "^com\\.thinomenon\\.RemoteDesktopConnection$",
-                "^com\\.itap-mobile\\.qmote$",
-                "^com\\.nulana\\.remotixmac$",
-                "^com\\.p5sys\\.jump\\.mac\\.viewer$",
-                "^com\\.p5sys\\.jump\\.mac\\.viewer\\.web$",
-                "^com\\.vmware\\.horizon$",
-                "^com\\.2X\\.Client\\.Mac$",
-                "^com\\.googlecode\\.iterm2$",
-                "^com\\.apple\\.Terminal$",
-                "^co\\.zeit\\.hyperterm$",
-                "^co\\.zeit\\.hyper$",
-                "^org\\.vim\\.",
-                "^com\\.vmware\\.fusion$",
-                "^com\\.vmware\\.horizon$",
-                "^com\\.vmware\\.view$",
-                "^com\\.parallels\\.desktop$",
-                "^com\\.parallels\\.vm$",
-                "^com\\.parallels\\.desktop\\.console$",
-                "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                "^com\\.vmware\\.proxyApp\\.",
-                "^com\\.parallels\\.winapp\\.",
-                "^org\\.x\\.X11$",
-                "^com\\.apple\\.x11$",
-                "^org\\.macosforge\\.xquartz\\.X11$",
-                "^org\\.macports\\.X11$"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "c",
-            "modifiers": {
-              "mandatory": [
-                "shift",
-                "control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "c",
-              "modifiers": [
-                "shift",
-                "command"
-              ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_unless",
-              "bundle_identifiers": [
-                "^org\\.gnu\\.Emacs$",
-                "^org\\.gnu\\.AquamacsEmacs$",
-                "^org\\.gnu\\.Aquamacs$",
-                "^org\\.pqrs\\.unknownapp.conkeror$",
-                "^com\\.microsoft\\.rdc$",
-                "^com\\.microsoft\\.rdc\\.mac$",
-                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
-                "^net\\.sf\\.cord$",
-                "^com\\.thinomenon\\.RemoteDesktopConnection$",
-                "^com\\.itap-mobile\\.qmote$",
-                "^com\\.nulana\\.remotixmac$",
-                "^com\\.p5sys\\.jump\\.mac\\.viewer$",
-                "^com\\.p5sys\\.jump\\.mac\\.viewer\\.web$",
-                "^com\\.vmware\\.horizon$",
-                "^com\\.2X\\.Client\\.Mac$",
-                "^com\\.googlecode\\.iterm2$",
-                "^com\\.apple\\.Terminal$",
-                "^co\\.zeit\\.hyperterm$",
-                "^co\\.zeit\\.hyper$",
-                "^org\\.vim\\.",
-                "^com\\.vmware\\.fusion$",
-                "^com\\.vmware\\.horizon$",
-                "^com\\.vmware\\.view$",
-                "^com\\.parallels\\.desktop$",
-                "^com\\.parallels\\.vm$",
-                "^com\\.parallels\\.desktop\\.console$",
-                "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                "^com\\.vmware\\.proxyApp\\.",
-                "^com\\.parallels\\.winapp\\.",
-                "^org\\.x\\.X11$",
-                "^com\\.apple\\.x11$",
-                "^org\\.macosforge\\.xquartz\\.X11$",
-                "^org\\.macports\\.X11$"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "v",
-            "modifiers": {
-              "mandatory": [
-                "shift",
-                "control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "v",
-              "modifiers": [
-                "shift",
                 "command"
               ]
             }

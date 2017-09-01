@@ -1,0 +1,123 @@
+{
+  "title": "Vim Emulation",
+  "rules": [
+    {
+      "description": "Vim Emulation",
+      "manipulators":
+      <%=
+        manipulators = []
+
+        # Change to normal mode
+        manipulators += vim_emu(
+          source_keys_list: ["escape", from("open_bracket", ["control"], [], false)],
+          dest_keys_list: [[], []],
+          to_post_events: [
+            {"key_code": "left_arrow"},
+            {"set_variable": {"name": "vim_emu_normal", "value": 1}}, {"set_variable": {"name": "vim_emu_visual", "value": 0}}
+          ],
+          mode: "visual"
+        )
+
+        manipulators += vim_emu(
+          source_keys_list: ["escape", from("open_bracket", ["control"], [], false)],
+          dest_keys_list: [[], []],
+          to_post_events: [
+            {"set_variable": {"name": "vim_emu_normal", "value": 1}}, {"set_variable": {"name": "vim_emu_visual", "value": 0}}
+          ],
+          mode: ""
+        )
+
+        # Move (normal mode)
+        manipulators += vim_emu(
+          source_keys_list: ["h", "j", "k", "l"],
+          dest_keys_list: ["left_arrow", "down_arrow", "up_arrow", "right_arrow"]
+        )
+
+        # Change to insert (OS default) mode (normal mode)
+#        manipulators += vim_emu(
+#          source_keys_list: ["i", "a", "o"],
+#          dest_keys_list: [
+#            [{"set_variable": {"name": "vim_emu_normal", "value": 0}}],
+#            [
+#              {"key_code": "right_arrow"},
+#              {"set_variable": {"name": "vim_emu_normal", "value": 0}}
+#            ],
+#            [
+#              {"key_code": "right_arrow", "modifiers": {"mandatory": ["command"]}}},
+#              {"set_variable": {"name": "vim_emu_normal", "value": 0}}
+#            ],
+#            [],
+#          ]
+#        )
+#        manipulators += vim_emu(
+#          source_keys_list: ["i", "a", "o"],
+#          dest_keys_list: [
+#            [{"set_variable": {"name": "vim_emu_normal", "value": 0}}],
+#            [],
+#          ],
+#          from_mandatory_modifiers: ["shift"]
+#        )
+
+        # Change to visual mode
+        manipulators += vim_emu(
+          source_keys_list: "v",
+          dest_keys_list: [
+            {"set_variable": {"name": "vim_emu_normal", "value": 0}}, {"set_variable": {"name": "vim_emu_visual", "value": 1}}
+          ]
+        )
+
+        # Move (visual mode)
+        manipulators += vim_emu(
+          source_keys_list: ["h", "j", "k", "l"],
+          dest_keys_list: ["left_arrow", "down_arrow", "up_arrow", "right_arrow"],
+          to_modifiers: ["shift"],
+          mode: "visual"
+        )
+
+        ## Keep Ctrl-Tab, Cmd-Tab (normal mode)
+        #manipulators += vim_emu(
+        #  source_keys_list: "tab",
+        #  dest_keys_list: "tab",
+        #  from_mandatory_modifiers: ["control"],
+        #  to_modifiers: ["control"],
+        #  mode: "visual",
+        #)
+        #manipulators += vim_emu(
+        #  source_keys_list: "tab",
+        #  dest_keys_list: "tab",
+        #  from_mandatory_modifiers: ["command"],
+        #  to_modifiers: ["command"],
+        #  mode: "visual",
+        #)
+
+        ## Keep Ctrl-Tab, Cmd-Tab
+        #manipulators += vim_emu(
+        #  source_keys_list: "tab",
+        #  dest_keys_list: "tab",
+        #  from_mandatory_modifiers: ["control"],
+        #  to_modifiers: ["control"],
+        #  mode: ["normal", "visual"]
+        #)
+        #manipulators += vim_emu(
+        #  source_keys_list: "tab",
+        #  dest_keys_list: "tab",
+        #  from_mandatory_modifiers: ["command"],
+        #  to_modifiers: ["command"],
+        #  mode: ["normal", "visual"]
+        #)
+
+        # Disable other keys
+        # This works not as expected.
+        # If this is appleid, modifier keys are ignored for these who have key mappings w/o modifiers,
+        # and keys are disabled for these who have key mappings but with modifiers.
+        #manipulators += vim_emu(
+        #  source_keys_list: "any",
+        #  dest_keys_list: "vk_none",
+        #  from_optional_modifiers: ["any"],
+        #  mode: ["normal", "visual"]
+        #)
+        JSON.generate(manipulators)
+      %>
+    }
+  ]
+}
