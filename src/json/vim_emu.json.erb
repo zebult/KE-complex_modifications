@@ -9,70 +9,324 @@
 
         # Change to normal mode
         manipulators += vim_emu(
-          source_keys_list: ["escape", from("open_bracket", ["control"], [], false)],
+          source_keys_list: ["escape", hash_from("open_bracket", ["control"])],
           dest_keys_list: [[], []],
-          to_post_events: [
-            {"key_code": "left_arrow"},
-            {"set_variable": {"name": "vim_emu_normal", "value": 1}}, {"set_variable": {"name": "vim_emu_visual", "value": 0}}
-          ],
-          mode: "visual"
+          to_post_events: ["left_arrow"] + vim_emu_mode(normal: 1),
+          mode: ["visual", "visual_line"]
         )
 
-        manipulators += vim_emu(
-          source_keys_list: ["escape", from("open_bracket", ["control"], [], false)],
+        manipulators += each_key(
+          source_keys_list: ["escape", hash_from("open_bracket", ["control"])],
           dest_keys_list: [[], []],
-          to_post_events: [
-            {"set_variable": {"name": "vim_emu_normal", "value": 1}}, {"set_variable": {"name": "vim_emu_visual", "value": 0}}
-          ],
-          mode: ""
+          to_post_events: vim_emu_mode(normal: 1),
+          conditions: [frontmost_application_unless("vim_emu",false)]
         )
-
-        # Move (normal mode)
-        manipulators += vim_emu(
-          source_keys_list: ["h", "j", "k", "l"],
-          dest_keys_list: ["left_arrow", "down_arrow", "up_arrow", "right_arrow"]
-        )
-
-        # Change to insert (OS default) mode (normal mode)
-#        manipulators += vim_emu(
-#          source_keys_list: ["i", "a", "o"],
-#          dest_keys_list: [
-#            [{"set_variable": {"name": "vim_emu_normal", "value": 0}}],
-#            [
-#              {"key_code": "right_arrow"},
-#              {"set_variable": {"name": "vim_emu_normal", "value": 0}}
-#            ],
-#            [
-#              {"key_code": "right_arrow", "modifiers": {"mandatory": ["command"]}}},
-#              {"set_variable": {"name": "vim_emu_normal", "value": 0}}
-#            ],
-#            [],
-#          ]
-#        )
-#        manipulators += vim_emu(
-#          source_keys_list: ["i", "a", "o"],
-#          dest_keys_list: [
-#            [{"set_variable": {"name": "vim_emu_normal", "value": 0}}],
-#            [],
-#          ],
-#          from_mandatory_modifiers: ["shift"]
-#        )
 
         # Change to visual mode
         manipulators += vim_emu(
-          source_keys_list: "v",
+          source_keys_list: ["v"],
+          dest_keys_list: [vim_emu_mode(visual: 1)]
+        )
+        manipulators += vim_emu(
+          source_keys_list: [hash_from("v", ["shift"])],
+          dest_keys_list: [[["left_arrow", ["command"]], ["down_arrow", ["shift"]]]+vim_emu_mode(visual_line: 1)]
+        )
+
+        # Change to insert (OS default) mode (normal mode)
+        manipulators += vim_emu(
+          source_keys_list: ["i", "a", "o"],
           dest_keys_list: [
-            {"set_variable": {"name": "vim_emu_normal", "value": 0}}, {"set_variable": {"name": "vim_emu_visual", "value": 1}}
+            vim_emu_mode(),
+            [["right_arrow"]] + vim_emu_mode(),
+            [["right_arrow", ["command"]], ["return_or_enter"]] + vim_emu_mode()
+          ]
+        )
+        manipulators += vim_emu(
+          source_keys_list: ["i", "a", "o"],
+          from_mandatory_modifiers: ["shift"],
+          dest_keys_list: [
+            [["left_arrow", ["command"]], ["right_arrow", ["option"]], ["left_arrow", ["option"]]] + vim_emu_mode(),
+            [["right_arrow", ["command"]]] + vim_emu_mode(),
+            [["up_arrow"], ["right_arrow", ["command"]]] + vim_emu_mode()
           ]
         )
 
-        # Move (visual mode)
+        # Move (normal, viaual modes)
         manipulators += vim_emu(
-          source_keys_list: ["h", "j", "k", "l"],
-          dest_keys_list: ["left_arrow", "down_arrow", "up_arrow", "right_arrow"],
-          to_modifiers: ["shift"],
+          source_keys_list: ["h", "l"],
+          dest_keys_list: ["left_arrow", "right_arrow"],
+          move: 1
+        )
+
+        manipulators += vim_emu(
+          source_keys_list: [
+            "0",
+            hash_from("4", ["shift"]), # $
+            hash_from("6", ["shift"]), # ^
+            hash_from("open_bracket", ["shift"]), # {
+            hash_from("close_bracket", ["shift"]), # }
+          ],
+          dest_keys_list: [
+            hash_to([["left_arrow", ["command"]]]),
+            hash_to([["right_arrow", ["command"]]]),
+            hash_to([["left_arrow", ["command"]], ["right_arrow", ["option"]], ["left_arrow", ["option"]]]),
+            hash_to([["a", ["control"]]]),
+            hash_to([["e", ["control"]]])
+          ],
+          move: 1
+        )
+
+        manipulators += vim_emu(
+          source_keys_list: ["w", "e", "b"],
+          dest_keys_list: [
+            hash_to([["right_arrow", ["option"]], ["right_arrow", ["option"]], ["left_arrow", ["option"]]]),
+            hash_to([["right_arrow", ["option"]]]),
+            hash_to([["left_arrow", ["option"]]])
+          ],
+          move: 1
+        )
+
+        # Move up (normal, viaual modes)
+        manipulators += vim_emu(
+          source_keys_list: ["k", "hyphen", hash_from("u", ["control"])],
+          dest_keys_list: [
+            "up_arrow",
+            hash_to([["up_arrow"], ["left_arrow", ["command"]], ["right_arrow", ["option"]], ["left_arrow", ["option"]]]),
+            hash_to([["up_arrow", ["option"]]], 10)
+          ],
+          move: 2
+        )
+        manipulators += vim_emu(
+          source_keys_list: [hash_from("b", ["control"])],
+          dest_keys_list: [
+            hash_to([["page_up", ["option"]]])
+          ],
+          move: 2
+        )
+        # opt-shift-pageup doesn't select words...?
+        manipulators += vim_emu(
+          source_keys_list: [hash_from("b", ["control"])],
+          dest_keys_list: [
+            hash_to([["page_up", ["shift"]]])
+          ],
           mode: "visual"
         )
+
+        # Move down (normal, viaual modes)
+        manipulators += vim_emu(
+          source_keys_list: ["j", hash_from("equal_sign", ["shift"]), hash_from("d", ["control"]), hash_from("g", ["shift"])],
+          dest_keys_list: [
+            "down_arrow",
+            hash_to([["down_arrow"], ["left_arrow", ["command"]], ["right_arrow", ["option"]], ["left_arrow", ["option"]]]),
+            hash_to([["down_arrow", ["option"]]], 10),
+            hash_to([["down_arrow", ["command"]]])
+          ],
+          move: 2
+        )
+        manipulators += vim_emu(
+          source_keys_list: [hash_from("f", ["control"])],
+          dest_keys_list: [
+            hash_to([["page_down", ["option"]]])
+          ],
+          move: 2
+        )
+        manipulators += vim_emu(
+          source_keys_list: [hash_from("f", ["control"])],
+          dest_keys_list: [
+            hash_to([["page_down", ["shift"]]])
+          ],
+          mode: "visual"
+        )
+
+        # ydc
+        manipulators += vim_emu(
+          source_keys_list: ["y", "d", "c"],
+          dest_keys_list: [
+            vim_emu_mode(y: 1),
+            vim_emu_mode(d: 1),
+            vim_emu_mode(c: 1)
+          ]
+        )
+
+        manipulators += vim_emu(
+          source_keys_list: ["y"],
+          dest_keys_list: [
+            [["a", ["control"]], ["right_arrow", ["command", "shift"]], ["c", ["command"]]] + vim_emu_mode(normal: 1, line: 1)
+          ],
+          mode: "y"
+        )
+
+        manipulators += vim_emu(
+          source_keys_list: ["y"],
+          dest_keys_list: [
+            [["c", ["command"]]] + vim_emu_mode(normal: 1, line: 0)
+          ],
+          mode: "visual"
+        )
+
+        manipulators += vim_emu(
+          source_keys_list: [hash_from("y", ["shift"])],
+          dest_keys_list: [
+            [["a", ["control"]], ["right_arrow", ["command", "shift"]], ["c", ["command"]]] + vim_emu_mode(normal: 1, line: 1)
+          ],
+          mode: ["", "visual", "visual_line", "y"]
+        )
+
+        manipulators += vim_emu(
+          source_keys_list: ["d"],
+          dest_keys_list: [
+            [["a", ["control"]], ["right_arrow", ["command", "shift"]], ["x", ["command"]], ["delete_forward"]] + vim_emu_mode(normal: 1, line: 1)
+          ],
+          mode: "d"
+        )
+
+        manipulators += vim_emu(
+          source_keys_list: ["d"],
+          dest_keys_list: [
+            [["x", ["command"]]] + vim_emu_mode(normal: 1, line: 0)
+          ],
+          mode: "visual"
+        )
+
+        manipulators += vim_emu(
+          source_keys_list: [hash_from("d", ["shift"])],
+          dest_keys_list: [
+            [["right_arrow", ["command", "shift"]], ["x", ["command"]]] + vim_emu_mode(normal: 1, line: 1)
+          ],
+          mode: ["", "visual", "visual_line", "d"]
+        )
+
+        manipulators += vim_emu(
+          source_keys_list: ["c"],
+          dest_keys_list: [
+            [["a", ["control"]], ["right_arrow", ["command", "shift"]], ["x", ["command"]]] + vim_emu_mode(line: 1)
+          ],
+          mode: "c"
+        )
+
+        manipulators += vim_emu(
+          source_keys_list: ["c"],
+          dest_keys_list: [
+            [["x", ["command"]]] + vim_emu_mode(line: 0)
+          ],
+          mode: "visual"
+        )
+
+        manipulators += vim_emu(
+          source_keys_list: [hash_from("c", ["shift"])],
+          dest_keys_list: [
+            [["right_arrow", ["command", "shift"]], ["x", ["command"]]] + vim_emu_mode(line: 0)
+          ],
+          mode: ["", "visual", "visual_line", "c"]
+        )
+
+        # Paste
+        manipulators += vim_emu(
+          source_keys_list: ["p", hash_from("p", ["shift"])],
+          dest_keys_list: [
+            [["left_arrow", ["command"]], ["down_arrow"], ["v", ["command"]], ["return_or_enter"], ["up_arrow"]] + vim_emu_mode(normal: 1),
+            [["left_arrow", ["command"]], ["v", ["command"]], ["return_or_enter"], ["up_arrow"]] + vim_emu_mode(normal: 1),
+            [["v", ["command"]]] + vim_emu_mode(normal: 1),
+          ],
+          line: 1
+        )
+        manipulators += vim_emu(
+          source_keys_list: ["p", hash_from("p", ["shift"])],
+          dest_keys_list: [
+            [["right_arrow"], ["v", ["command"]]] + vim_emu_mode(normal: 1),
+            [["v", ["command"]]] + vim_emu_mode(normal: 1),
+          ]
+        )
+
+        manipulators += vim_emu(
+          source_keys_list: ["x", hash_from("x", ["shift"]), "s", hash_from("s", ["shift"])],
+          dest_keys_list: [
+            [["delete_forward"]], [["delete_or_backspace"]],
+            [["delete_forward"]] + vim_emu_mode(),
+            hash_to([["a", ["control"]], ["e", ["control", "shift"]], ["x", ["command"]]]) + vim_emu_mode(line: 1)
+          ]
+        )
+
+        # x/X/s/S for Delete/Cut
+        manipulators += vim_emu(
+          source_keys_list: ["x", hash_from("x", ["shift"]), "s", hash_from("s", ["shift"])],
+          dest_keys_list: [
+            hash_to([["right_arrow", ["shift"]], ["x", ["command"]]]),
+            hash_to([["left_arrow", ["shift"]], ["x", ["command"]]]),
+            hash_to([["right_arrow", ["shift"]], ["x", ["command"]]]) + vim_emu_mode(),
+            hash_to([["a", ["control"]], ["e", ["control", "shift"]], ["x", ["command"]]]) + vim_emu_mode(line: 1)
+          ]
+        )
+        manipulators += vim_emu(
+          source_keys_list: ["x", hash_from("x", ["shift"]), "s", hash_from("s", ["shift"])],
+          dest_keys_list: [
+            [["x", ["command"]]],
+            hash_to([["a", ["control"]], ["e", ["control", "shift"]], ["x", ["command"]]]) + vim_emu_mode(normal: 1, line: 1),
+            [["x", ["command"]]] + vim_emu_mode(),
+            hash_to([["e", ["control", "shift"]], ["x", ["command"]]]) + vim_emu_mode(line: 1)
+          ],
+          mode: visual
+        )
+
+        # u/Ctrl-r (undo/redo), r/R (replace),
+        # J (combine line), M (move to center), . (replace a following word with a clipboard)
+        # / (search), n/N (next/prev search), * (search word)
+        manipulators += vim_emu(
+          source_keys_list: ["u", hash_from("r", ["control"]), "r", hash_from("r", ["shift"]),
+                             hash_from("j", ["shift"]), hash_from("m", ["shift"]),
+                             "slash", "n", hash_from("n", ["shift"]), hash_from("8", ["shift"])],
+          dest_keys_list: [
+            [["z", ["command"]]], [["z", ["command", "shift"]]], vim_emu_mode(r: 1), vim_emu_mode(r_cont: 1),
+            hash_to([["right_arrow", ["command"]], ["spacebar"], ["delete_forward", ["shift"]], ["left_arrow"]]),
+            hash_to([["page_down", ["option"]], ["page_up", ["option"]]]),
+            hash_to([["f", ["command"]]]) + vim_emu_mode(),
+            hash_to([["f", ["command"]], ["g", ["command"]], ["g", ["command"]]]) + vim_emu_mode(search: 1),
+            hash_to([["f", ["command"]], ["g", ["command", "shift"]], ["g", ["command", "shift"]]]) + vim_emu_mode(search: 1),
+            hash_to([["left_arrow", ["option"]], ["right_arrow", ["option", "shift"]],
+                      ["c", ["command"]], ["f", ["command"]], ["v", ["command"]], ["return_or_enter"]]) + vim_emu_mode(search: 1)
+          ]
+        )
+
+        # repeat
+        all_letters = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
+                       "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+                       "spacebar", "hyphen", "equal_sign", "open_bracket", "close_bracket", "backslash", "non_us_pound",
+                       "semicolon", "quote", "grave_accent_and_tilde", "commna", "period", "slash"]
+        manipulators += vim_emu(
+          source_keys_list: all_letters,
+          from_optional_modifiers: ["shift"],
+          to_pre_events: [["delete_forward"]],
+          dest_keys_list: all_letters,
+          to_post_events: vim_emu_mode(normal: 1),
+          mode: "r"
+        )
+        manipulators += vim_emu(
+          source_keys_list: all_letters,
+          from_optional_modifiers: ["shift"],
+          to_pre_events: [["delete_forward"]],
+          dest_keys_list: all_letters,
+          mode: "r_cont"
+        )
+
+        # search
+        manipulators += vim_emu(
+          source_keys_list: ["n"],
+          from_optional_modifiers: ["shift"],
+          dest_keys_list: ["n"],
+          to_modifiers: ["option"],
+          mode: "search"
+        )
+
+        #manipulators += vim_emu(
+        #  source_keys_list: ["y", "
+        #  dest_keys_list: [
+        #    "down_arrow",
+        #    hash_to([["down_arrow"], ["left_arrow", ["command"]], ["right_arrow", ["option"]], ["left_arrow", ["option"]]]),
+        #    hash_to(["down_arrow", ["option"]], 10),
+        #    hash_to(["page_down", ["option"]]),
+        #    hash_to(["down_arrow", ["command"]])
+        #  ]
+        #)
 
         ## Keep Ctrl-Tab, Cmd-Tab (normal mode)
         #manipulators += vim_emu(

@@ -2,7 +2,7 @@
   "title": "sticky",
   "rules": [
     {
-      "description": "sticky shift - shift modifier",
+      "description": "sticky semicolon - shift modifier",
       "manipulators": [
         {
           "type": "basic",
@@ -12,7 +12,7 @@
           "to": [
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 1
               }
             }
@@ -20,7 +20,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 0
             }
           ]
@@ -39,7 +39,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -47,7 +47,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -66,7 +66,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -74,7 +74,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -93,7 +93,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -101,7 +101,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -120,7 +120,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -128,7 +128,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -147,7 +147,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -155,7 +155,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -174,7 +174,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -182,7 +182,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -201,7 +201,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -209,7 +209,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -228,7 +228,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -236,7 +236,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -255,7 +255,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -263,7 +263,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -282,7 +282,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -290,7 +290,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -309,7 +309,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -317,7 +317,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -336,7 +336,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -344,7 +344,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -363,7 +363,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -371,7 +371,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -390,7 +390,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -398,7 +398,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -417,7 +417,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -425,7 +425,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -444,7 +444,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -452,7 +452,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -471,7 +471,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -479,7 +479,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -498,7 +498,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -506,7 +506,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -525,7 +525,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -533,7 +533,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -552,7 +552,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -560,7 +560,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -579,7 +579,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -587,7 +587,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -606,7 +606,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -614,7 +614,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -633,7 +633,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -641,7 +641,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -660,7 +660,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -668,7 +668,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -687,7 +687,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -695,7 +695,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -714,7 +714,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -722,7 +722,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]
@@ -743,7 +743,7 @@
             },
             {
               "set_variable": {
-                "name": "sticky_a",
+                "name": "sticky_semicolon",
                 "value": 0
               }
             }
@@ -751,7 +751,7 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "sticky_a",
+              "name": "sticky_semicolon",
               "value": 1
             }
           ]

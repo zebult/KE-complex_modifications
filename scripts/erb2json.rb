@@ -55,7 +55,7 @@ def hash_from(key_code, mandatory_modifiers=[], optional_modifiers=[])
   from(key_code, mandatory_modifiers, optional_modifiers, false)
 end
 
-def to(events, as_json=true)
+def to(events, as_json=true, repeat=1)
   data = []
   events.each do |e|
     d = {}
@@ -71,12 +71,15 @@ def to(events, as_json=true)
     end
     data << d
   end
-  data
-  make_data(data, as_json)
+  data_total = []
+  repeat.times do |i|
+    data_total += data
+  end
+  make_data(data_total, as_json)
 end
 
-def hash_to(events)
-  to(events, false)
+def hash_to(events, repeat=1)
+  to(events, false, repeat)
 end
 
 def each_key(source_keys_list: :source_keys_list, dest_keys_list: :dest_keys_list, from_mandatory_modifiers: [], from_optional_modifiers: [], to_pre_events: [], to_modifiers: [], to_post_events: [], conditions: [], as_json: false)
@@ -317,7 +320,7 @@ def device_unless(app_aliases, as_json=true)
   device('device_unless', device_aliases, as_json)
 end
 
-def vim_emu(source_keys_list: :source_keys_list, dest_keys_list: :dest_keys_list, from_mandatory_modifiers: [], from_optional_modifiers: [], to_pre_events: [], to_modifiers: [], to_post_events: [], conditions: "", as_json: false, mode: "normal")
+def vim_emu(source_keys_list: :source_keys_list, dest_keys_list: :dest_keys_list, from_mandatory_modifiers: [], from_optional_modifiers: [], to_pre_events: [], to_modifiers: [], to_post_events: [], conditions: "", as_json: false, mode: "normal", move: 0, line: 0)
   mode = to_array(mode)
   data = []
   if conditions == ""
@@ -325,6 +328,15 @@ def vim_emu(source_keys_list: :source_keys_list, dest_keys_list: :dest_keys_list
       frontmost_application_unless("vim_emu",false)
     ]
   end
+  if line == 1
+    conditions += [{"type": "variable_if", "name": "vim_emu_line", "value": 1}]
+  end
+  if move == 1
+    mode = ["normal", "visual"]
+  elsif move == 2
+    mode = ["normal", "visual", "visual_line"]
+  end
+
   mode.each do |m|
     conditions_vim_emu = deepcopy(conditions)
     if m != ""
@@ -332,9 +344,36 @@ def vim_emu(source_keys_list: :source_keys_list, dest_keys_list: :dest_keys_list
         {"type": "variable_if", "name": "vim_emu_#{m}", "value": 1}
       ]
     end
+
+    dest_keys_list_vim_emu = []
+    if move > 0 and ["visual", "visual_line"].include?(m)
+      dest_keys_list.each do |to_key|
+        events = []
+        if to_key.is_a? String
+          events << [to_key, to_modifiers]
+        elsif to_key.is_a? Array
+          to_key.each do |e|
+            events << e
+          end
+        else
+          events << to_key
+        end
+        events = hash_to(deepcopy(events))
+        events.each do |e|
+          if e.key?("key_code")
+            e["modifiers"] = [] unless e.key?("modifiers")
+            e["modifiers"] << "shift"
+          end
+        end
+        dest_keys_list_vim_emu << events
+      end
+    else
+      dest_keys_list_vim_emu = deepcopy(dest_keys_list)
+    end
+
     data += each_key(
       source_keys_list: source_keys_list,
-      dest_keys_list: dest_keys_list,
+      dest_keys_list: dest_keys_list_vim_emu,
       from_mandatory_modifiers: from_mandatory_modifiers,
       from_optional_modifiers: from_optional_modifiers,
       to_pre_events: to_pre_events,
@@ -344,6 +383,23 @@ def vim_emu(source_keys_list: :source_keys_list, dest_keys_list: :dest_keys_list
       as_json: false
     )
   end
+  make_data(data, as_json)
+end
+
+def vim_emu_mode(normal: 0, visual: 0, visual_line: 0, y: 0, c: 0, d: 0, g: 0, r:0, r_cont: 0, search: 0, line: -1, as_json: false)
+  data = [
+    {"set_variable": {"name": "vim_emu_normal", "value": normal}},
+    {"set_variable": {"name": "vim_emu_visual", "value": visual}},
+    {"set_variable": {"name": "vim_emu_visual_line", "value": visual_line}},
+    {"set_variable": {"name": "vim_emu_y", "value": y}},
+    {"set_variable": {"name": "vim_emu_c", "value": c}},
+    {"set_variable": {"name": "vim_emu_d", "value": d}},
+    {"set_variable": {"name": "vim_emu_g", "value": g}},
+    {"set_variable": {"name": "vim_emu_r", "value": r}},
+    {"set_variable": {"name": "vim_emu_r_cont", "value": r_cont}},
+    {"set_variable": {"name": "vim_emu_search", "value": search}}
+  ]
+  data += [{"set_variable": {"name": "vim_emu_line", "value": line}}] if line != -1
   make_data(data, as_json)
 end
 
