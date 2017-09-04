@@ -24,7 +24,7 @@ It is enabled for other than applications related to terminal, vim, emacs, brows
   Application condition for vim_emu.
   </summary>
   <div>
-<code>
+  <pre><code>
 "conditions": [
   {
     "type": "frontmost_application_unless",
@@ -88,7 +88,7 @@ It is enabled for other than applications related to terminal, vim, emacs, brows
     ]
   },
 ]
-</code>
+</code></pre>
   </div>
 </details>
 
