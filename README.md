@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/rcmdnk/KE-complex_modifications.svg?branch=master)](https://travis-ci.org/rcmdnk/KE-complex_modifications)
-
 # KE-complex_modifications
 
 complex_modifications for Karabiner-Elements by rcmdnk.
