@@ -134,9 +134,17 @@ After push `:`, a few commands to save/quit are available.
 |{/}| Move to the beginning/end of the paragraph (Mac Ctrl-a, Ctrl-e. It works rather like "sentence". Sometime, it is actual sentence rather than 0/$).|
 |w/e| Move a word forward (w: the beginning of the word, e: the end of the word).|
 |b, ge| Move a word backward (b: the beginning of the word, ge: the end of the word).|
-|Ctrl-u/Ctrl-d| Go Up/Down 10 line.|
+|Ctrl-u/Ctrl-d| Go Up/Down 10 lines.|
 |Ctrl-b/Ctrl-f| PageUp/PageDown.|
 |gg/G| Go to the top/bottom of the file|
+
+Multiple movement is available with `number` + `<move>`:
+
+* e.g.) `3l` -> move right 3 times.
+* e.g.) `4 Ctrl-u` -> got up 40 lines.
+
+Note: This is only for single number, is not available for numbers greater than equal 10.
+
 
 ### Yank/Cut(Delete)/Change/Paste
 |Key/Commands|Function|
