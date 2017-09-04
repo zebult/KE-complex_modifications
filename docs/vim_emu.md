@@ -10,7 +10,7 @@ For Windows, try [vim_ahk](https://github.com/rcmdnk/vim_ahk).
 ## Installation
 
 Install [Karabiner-Elements](https://github.com/tekezo/Karabiner-Elements)
-then go [Karabiner-Elements complex_modifications rules by rcmdnk](/KE-complex_modifications/) and import vim_emu.
+then go [Karabiner-Elements complex_modifications rules by rcmdnk](https://rcmdnk.com/KE-complex_modifications/) and import vim_emu.
 
 ## Keyboards
 Currently, vim_emu supports US.
