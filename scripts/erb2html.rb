@@ -20,8 +20,8 @@ def file_import_panel(json_file)
   File.open(json_file_path) do |f|
     data = JSON.parse(f.read)
     title = h(data['title'])
-    make_extra_description = h(data['make_extra_description']) if data.key?('make_extra_description')
-    rule_list = data.key?('rule_list') ? h(data['rule_list']) : true
+    make_extra_description = data['make_extra_description'] if data.key?('make_extra_description')
+    rule_list = data.key?('rule_list') ? data['rule_list'] : true
     if rule_list
       data['rules'].each do |rule|
         rule_descriptions += '<div class="list-group-item">' + h(rule['description']) + '</div>'
@@ -38,7 +38,6 @@ def file_import_panel(json_file)
     end
     if make
       cmd = "scripts/json2exhtml.rb < #{json_file_path} > #{extra_description_file_path}"
-      STDERR.puts cmd
       unless system(cmd)
         raise "Error at: #{cmd}"
       end
