@@ -1,5 +1,7 @@
 {
   "title": "Vim emulation",
+  "rule_list": false,
+  "make_extra_description": true,
   "rules": [
     {
       "description": "ESC to enter normal mode",
@@ -26,6 +28,7 @@
           "d",
           hash_to([["right_arrow", ["shift"]], ["x", ["command"]]]) + vim_emu_mode(line: 0),
           [["x", ["command"]]] + vim_emu_mode(line: 0),
+          true
         )
       %>
     },

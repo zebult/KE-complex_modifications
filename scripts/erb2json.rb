@@ -25,7 +25,7 @@ end
 def key(data, key)
   if key == "any"
     data['any'] = "key_code"
-  elsif key.start_with?("button")
+  elsif key.start_with? "button"
     data['pointing_button'] = key
   else
     data['key_code'] = key
@@ -349,7 +349,7 @@ def vim_emu(source_keys_list: :source_keys_list, dest_keys_list: :dest_keys_list
     end
 
     dest_keys_list_vim_emu = []
-    if move >= 10 and ["visual", "visual_line", "y", "d", "c"].include?(m)
+    if move >= 10 and ["visual", "visual_line", "y", "d", "c"].include? m
       dest_keys_list.each do |to_key|
         events = []
         if to_key.is_a? String
@@ -363,8 +363,8 @@ def vim_emu(source_keys_list: :source_keys_list, dest_keys_list: :dest_keys_list
         end
         events = hash_to(deepcopy(events))
         events.each do |e|
-          if e.key?("key_code")
-            e["modifiers"] = [] unless e.key?("modifiers")
+          if e.key? "key_code"
+            e["modifiers"] = [] unless e.key? "modifiers"
             e["modifiers"] << "shift"
           end
         end

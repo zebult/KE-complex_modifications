@@ -2,7 +2,6 @@
 
 require 'json'
 
-
 # event types extracted from Karabiner-Elements/src/share/event_queue.hpp
 event_types = [
   "key_code",
@@ -20,7 +19,6 @@ event_types = [
   "frontmost_application_changed",
   "set_variable"
 ]
-
 
 html = ""
 data = JSON.parse($stdin.read)
