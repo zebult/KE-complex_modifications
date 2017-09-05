@@ -2,7 +2,35 @@
   "title": "Vim emulation",
   "rules": [
     {
-      "description": "Vim emulation",
+      "description": "ESC to enter normal mode",
+      "extra_description_level": 1,
+      "manipulators": <%= vim_emu_esc("escape", true) %>
+    },
+    {
+      "description": "Ctrl-[ to enter normal mode",
+      "extra_description_level": 1,
+      "manipulators": <%= vim_emu_esc([hash_from("open_bracket", ["control"])], true) %>
+    },
+    {
+      "description": "Simultaneous jk to toggle normal-insert mode",
+      "extra_description_level": 1,
+      "manipulators": <%= vim_emu_simul("j", "k", hash_to([["down_arrow"]]), hash_to([["down_arrow", ["shift"]]]), true) %>
+    },
+    {
+      "description": "Simultaneous sd to toggle normal-insert mode",
+      "extra_description_level": 1,
+      "manipulators":
+      <%=
+        vim_emu_simul(
+          "s",
+          "d",
+          hash_to([["right_arrow", ["shift"]], ["x", ["command"]]]) + vim_emu_mode(line: 0),
+          [["x", ["command"]]] + vim_emu_mode(line: 0),
+        )
+      %>
+    },
+    {
+      "description": "Vim emulation core part",
       "extra_description_level": 1,
       "extra_descriptions": [
         "<a href=\"https://github.com/rcmdnk/KE-complex_modifications/blob/master/docs/vim_emu.md\">Details of Vim emulation</a>"
@@ -10,27 +38,6 @@
       "manipulators":
       <%=
         manipulators = []
-
-        # Change to normal mode
-        manipulators += vim_emu(
-          source_keys_list: ["escape", hash_from("open_bracket", ["control"])],
-          dest_keys_list: [[], []],
-          to_post_events: [["left_arrow"]] + vim_emu_mode(normal: 1),
-          mode: ["visual", "visual_line"],
-        )
-
-        manipulators += vim_emu(
-          source_keys_list: ["escape", hash_from("open_bracket", ["control"])],
-          dest_keys_list: [[], []],
-          to_post_events: hash_to([["tab"], ["tab"], ["spacebar"]]) + vim_emu_mode(normal: 1),
-          mode: ["search", "search_input"]
-        )
-
-        manipulators += vim_emu(
-          source_keys_list: ["escape", hash_from("open_bracket", ["control"])],
-          dest_keys_list: [[], []],
-          to_post_events: vim_emu_mode(normal: 1),
-        )
 
         # Change to visual mode
         manipulators += vim_emu(
