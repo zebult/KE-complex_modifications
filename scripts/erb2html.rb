@@ -6,13 +6,13 @@ require 'json'
 include ERB::Util
 
 def file_import_panel(json_file)
-  if json_file =~ /docs\/json\/[^\/]+.json/
+  if json_file =~ /^docs\/json\/[^\/]+.json/
     json_file_path = json_file
     json_file = json_file_path.split("/")[-1]
   else
     json_file_path = "docs/json/#{json_file}"
   end
-  json_name = json_file.gsub(/.json/, '')
+  json_name = json_file.gsub(/.json$/, '')
   title = ''
   rule_descriptions = ''
   make_extra_description = false
@@ -54,7 +54,7 @@ def file_import_panel(json_file)
     <div class="panel panel-default">
       <div class="panel-heading">
         <a class="panel-title btn btn-link" role="button" data-toggle="collapse" href="##{json_name}" aria-expanded="false" aria-controls="#{json_name}">#{title}</a>
-       <a class=\"btn btn-primary btn-sm pull-right\" data-json-path=\"json/#{json_file}\">Import</a>
+        <a class=\"btn btn-primary btn-sm pull-right\" data-json-path=\"json/#{json_file}\">Import</a>
       </div>
       <div class="list-group collapse" id="#{json_name}">
           #{rule_descriptions}
