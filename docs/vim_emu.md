@@ -12,7 +12,18 @@ For Windows, try [vim_ahk](https://github.com/rcmdnk/vim_ahk).
 Install [Karabiner-Elements](https://github.com/tekezo/Karabiner-Elements)
 then go [Karabiner-Elements complex_modifications rules by rcmdnk](https://rcmdnk.com/KE-complex_modifications/) and import vim_emu.
 
+There are several options for switching modes and one core  part:
 
+* ESC to enter normal mode
+* Ctrl-[ to enter normal mode
+* Simultaneous jk to toggle normal-insert mode
+* Simultaneous sd to toggle normal-insert mode
+* Vim emulation core part
+
+Enable some of these switching options as you like,
+and enable **Vim emulation core part**.
+
+Switching options must be placed higher than **Vim emulation core part** in **Enable rules** list.
 
 ## Keyboards
 Currently, vim_emu supports US.
@@ -117,8 +128,7 @@ After push `:`, a few commands to save/quit are available.
 |Key/Commands|Function|
 |:----------:|:-------|
 |ESC/Ctrl-[| Enter Normal mode.|
-|Simultaneous jk| Toggle Normal-Insert mode. Enter Normal mode at Visual mode.|
-|Simultaneous sd| Toggle Normal-Insert mode. Enter Normal mode at Visual mode.|
+|Simultaneous jk/sd| Toggle Normal-Insert mode. Enter Normal mode at Visual mode.|
 
 To use these simultaneous keys, the first key (`j` or `s`) must be pushed first.
 In addition, key repeat is disabled for these first keys,

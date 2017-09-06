@@ -17,7 +17,7 @@
           ],
           conditions: [{"type": "variable_if", "name": "sticky_semicolon", "value": 0}]
         )
-        keys = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+        keys = ("a".."z").to_a
         manipulators += each_key(
           source_keys_list: keys,
           dest_keys_list: keys,

@@ -414,22 +414,53 @@ def vim_emu(source_keys_list: :source_keys_list, dest_keys_list: :dest_keys_list
   make_data(data, as_json)
 end
 
+def vim_emu_modes(list="change")
+  normal_modes = ["normal"]
+  visual_modes = ["visual", "visual_line"]
+  command_modes = ["command", "command_w"]
+  ydc_modes = ["y", "d", "c"]
+  replace_modes = ["r", "r_cont"]
+  search_modes = ["search", "search_input"]
+  insert_modes = ["insert"]
+  other_modes = ["g", "z"]
+  values = ["line", "n"]
 
-def vim_emu_mode(normal: 0, visual: 0, visual_line: 0, command: 0, command_w: 0, insert: 0, y:0, d: 0, c: 0, g: 0, r:0, r_cont: 0, search_input: 0, search: 0, z: 0, line: -1, as_json: false)
+  main_modes = normal_modes + visual_modes + command_modes
+  sub_modes = ydc_modes + other_modes
+  all_modes = main_modes + replace_modes + sub_modes + insert_modes
+
+  if list == "change"
+    all_modes + ["n"]
+  elsif list == "disable"
+    main_modes + sub_modes
+  elsif list == "select"
+    visual_modes + ydc_modes
+  else
+    all_modes + values
+  end
+end
+
+def vim_emu_mode(normal: 0, visual: 0, visual_line: 0, command: 0, command_w: 0, y:0, d: 0, c: 0, g: 0, r:0, r_cont: 0, search_input: 0, search: 0, z: 0, insert: 0, line: -1, as_json: false)
+  # vim_emu_mode() -> insert mode
   any = 0
-  vim_emu_modes = ["normal", "visual", "visual_line", "command", "command_w", "insert", "y", "d", "c", "g", "r", "r_cont", "search_input", "search", "z"]
-  vim_emu_modes.each do |m|
+  modes = vim_emu_modes("change")
+  modes.each do |m|
     if eval(m) == 1
       any = 1
       break
     end
   end
   insert = 1 if any == 0
+
+  # Always reset n at mode change
   n = 0
-  modes = vim_emu_modes + ["n"]
+  modes = modes + ["n"]
+
+  # Change line mode only if it is given
   modes += ["line"] if line != -1
+
   data = []
-  (vim_emu_modes + ["n"]).each do |m|
+  (modes + ["n"]).each do |m|
     data.push({"set_variable": {"name": "vim_emu_#{m}", "value": eval(m)}})
   end
   make_data(data, as_json)
@@ -512,7 +543,6 @@ def vim_emu_simul(key1, key2, key1_normal, key1_visual, as_json=false)
 
   make_data(data, as_json)
 end
-
 
 number_letters = ("1".."9").to_a
 alphabet_letters = ("a".."z").to_a

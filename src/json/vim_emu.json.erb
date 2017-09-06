@@ -70,7 +70,7 @@
           dest_keys_list: [
             [["left_arrow", ["command"]], ["right_arrow", ["option"]], ["left_arrow", ["option"]]] + vim_emu_mode(),
             [["right_arrow", ["command"]]] + vim_emu_mode(),
-            [["up_arrow"], ["right_arrow", ["command"]]] + vim_emu_mode()
+            [["up_arrow"], ["right_arrow", ["command"]], ["return_or_enter"]] + vim_emu_mode()
           ],
           mode: "normal",
         )
@@ -128,27 +128,23 @@
           move: 21,
         )
 
-        #manipulators += vim_emu(
-        #  source_keys_list: [hash_from("b", ["control"])],
-        #  dest_keys_list: [
-        #    hash_to([["page_up", ["option"]]])
-        #  ],
-        #  move: 20,
-        #)
-        ## opt-shift-pageup doesn't select words...?
-        #manipulators += vim_emu(
-        #  source_keys_list: [hash_from("b", ["control"])],
-        #  dest_keys_list: [
-        #    hash_to([["page_up", ["shift"]]])
-        #  ],
-        #  mode: ["visual", "visual_line"],
-        #)
+        # page_up/down alone don't move cursor.
+        # with option, they move cursor.
+        # with shift, they move cursor with content select.
+        # with shift + option, they move cursor without content select.
         manipulators += vim_emu(
           source_keys_list: [hash_from("b", ["control"])],
           dest_keys_list: [
-            hash_to([["page_up"]])
+            hash_to([["page_up", ["option"]]])
           ],
-          move: 20,
+          mode: ["normal"]
+        )
+        manipulators += vim_emu(
+          source_keys_list: [hash_from("b", ["control"])],
+          dest_keys_list: [
+            hash_to([["page_up", ["shift"]]])
+          ],
+          mode: vim_emu_modes("select")
         )
 
         manipulators += vim_emu(
@@ -175,26 +171,19 @@
           move: 21,
         )
 
-        #manipulators += vim_emu(
-        #  source_keys_list: [hash_from("f", ["control"])],
-        #  dest_keys_list: [
-        #    hash_to([["page_down", ["option"]]])
-        #  ],
-        #  move: 21,
-        #)
-        #manipulators += vim_emu(
-        #  source_keys_list: [hash_from("f", ["control"])],
-        #  dest_keys_list: [
-        #    hash_to([["page_down", ["shift"]]])
-        #  ],
-        #  mode: "visual",
-        #)
         manipulators += vim_emu(
           source_keys_list: [hash_from("f", ["control"])],
           dest_keys_list: [
-            hash_to([["page_down"]])
+            hash_to([["page_down", ["option"]]])
           ],
-          move: 21,
+          mode: ["normal"]
+        )
+        manipulators += vim_emu(
+          source_keys_list: [hash_from("f", ["control"])],
+          dest_keys_list: [
+            hash_to([["page_down", ["shift"]]])
+          ],
+          mode: vim_emu_modes("select")
         )
 
         manipulators += vim_emu(
@@ -400,48 +389,13 @@
           mode: "z",
         )
 
-        ## Keep Ctrl-Tab, Cmd-Tab (normal mode)
-        #manipulators += vim_emu(
-        #  source_keys_list: "tab",
-        #  dest_keys_list: "tab",
-        #  from_mandatory_modifiers: ["control"],
-        #  to_modifiers: ["control"],
-        #  mode: "visual",
-        #)
-        #manipulators += vim_emu(
-        #  source_keys_list: "tab",
-        #  dest_keys_list: "tab",
-        #  from_mandatory_modifiers: ["command"],
-        #  to_modifiers: ["command"],
-        #  mode: "visual",
-        #)
-
-        ## Keep Ctrl-Tab, Cmd-Tab
-        #manipulators += vim_emu(
-        #  source_keys_list: "tab",
-        #  dest_keys_list: "tab",
-        #  from_mandatory_modifiers: ["control"],
-        #  to_modifiers: ["control"],
-        #  mode: ["normal", "visual"]
-        #)
-        #manipulators += vim_emu(
-        #  source_keys_list: "tab",
-        #  dest_keys_list: "tab",
-        #  from_mandatory_modifiers: ["command"],
-        #  to_modifiers: ["command"],
-        #  mode: ["normal", "visual"]
-        #)
-
         # Disable other keys
-        # This works not as expected.
-        # If this is appleid, modifier keys are ignored for these who have key mappings w/o modifiers,
-        # and keys are disabled for these who have key mappings but with modifiers.
-        #manipulators += vim_emu(
-        #  source_keys_list: "any",
-        #  dest_keys_list: "vk_none",
-        #  from_optional_modifiers: ["any"],
-        #  mode: ["normal", "visual"]
-        #)
+        manipulators += vim_emu(
+          source_keys_list: all_letters,
+          dest_keys_list: Array.new(alphabet_letters.size, "vk_none"),
+          from_optional_modifiers: ["shift"],
+          mode: vim_emu_modes("disable"),
+        )
         JSON.generate(manipulators)
       %>
     }
