@@ -27,7 +27,7 @@
           "s",
           "d",
           hash_to([["right_arrow", ["shift"]], ["x", ["command"]]]) + vim_emu_mode(line: 0),
-          [["x", ["command"]]] + vim_emu_mode(line: 0),
+          hash_to([["x", ["command"]]]) + vim_emu_mode(line: 0),
           true
         )
       %>
@@ -392,7 +392,7 @@
         # Disable other keys
         manipulators += vim_emu(
           source_keys_list: all_letters,
-          dest_keys_list: Array.new(alphabet_letters.size, "vk_none"),
+          dest_keys_list: Array.new(all_letters.size, "vk_none"),
           from_optional_modifiers: ["shift"],
           mode: vim_emu_modes("disable"),
         )
