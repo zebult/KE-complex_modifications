@@ -137,6 +137,10 @@ def each_key(source_keys_list: :source_keys_list, dest_keys_list: :dest_keys_lis
 end
 
 def frontmost_application(type, app_aliases, as_json=true)
+  finder_bundle_identifiers = [
+    '^com\.apple\.finder$',
+  ]
+
   browser_bundle_identifiers = [
     '^org\.mozilla\.firefox$',
     '^com\.google\.Chrome$',
@@ -213,6 +217,9 @@ def frontmost_application(type, app_aliases, as_json=true)
 
   to_array(app_aliases).each do |app_alias|
     case app_alias
+    when 'finder'
+      bundle_identifiers.concat(finder_bundle_identifiers)
+
     when 'iterm2'
       bundle_identifiers.concat(iterm2_bundle_identifiers)
 

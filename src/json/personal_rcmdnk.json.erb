@@ -6,7 +6,7 @@
     {
       "description": "For HHKB ((Shift-)Esc to grave accent (tilde))",
       "extra_descriptions": [
-        "Only for HHKB (vendor id = 2131).",
+        "For HHKB (vendor id = 2131).",
         "And only for terminal, vim, emacs.",
         "As HHKB's ESC is place for &#096; (gravce accent (back quote)) and ~ (tilde) at other keyboards.",
         "Better to bind Control-[ to ESC as in below setting."
@@ -81,9 +81,9 @@
       %>
     },
     {
-      "description": "Next/Prev by ctrl-i/o, option-left/right arrow",
+      "description": "Next/Prev by ctrl-i/o, option-left/right arrow at Finder",
       "extra_descriptions": [
-        "For other than terminal, vim, emacs."
+        "For Finder."
       ],
       "manipulators":
       <%=
@@ -92,14 +92,14 @@
           dest_keys_list: ["close_bracket", "open_bracket"],
           from_mandatory_modifiers: ["control"],
           to_modifiers: ["command"],
-          conditions: [frontmost_application_unless("emacs_key_bindings_exception", false)]
+          conditions: [frontmost_application_unless("finder", false)]
         )
         manipulators += each_key(
           source_keys_list: ["right_arrow", "left_arrow"],
           dest_keys_list: ["close_bracket", "open_bracket"],
           from_mandatory_modifiers: ["option"],
           to_modifiers: ["command"],
-          conditions: [frontmost_application_unless("emacs_key_bindings_exception", false)]
+          conditions: [frontmost_application_unless("finder", false)]
         )
         JSON.generate(manipulators)
       %>
