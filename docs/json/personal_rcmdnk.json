@@ -1189,7 +1189,7 @@
           ],
           "conditions": [
             {
-              "type": "frontmost_application_unless",
+              "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^com\\.apple\\.finder$"
               ]
@@ -1216,7 +1216,7 @@
           ],
           "conditions": [
             {
-              "type": "frontmost_application_unless",
+              "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^com\\.apple\\.finder$"
               ]
@@ -1243,7 +1243,7 @@
           ],
           "conditions": [
             {
-              "type": "frontmost_application_unless",
+              "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^com\\.apple\\.finder$"
               ]
@@ -1270,7 +1270,7 @@
           ],
           "conditions": [
             {
-              "type": "frontmost_application_unless",
+              "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^com\\.apple\\.finder$"
               ]
