@@ -1309,6 +1309,7 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^org\\.mozilla\\.firefox$",
+                "^org\\.waterfoxproject\\.waterfox$",
                 "^com\\.google\\.Chrome$",
                 "^com\\.apple\\.Safari$"
               ]
@@ -1340,6 +1341,7 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^org\\.mozilla\\.firefox$",
+                "^org\\.waterfoxproject\\.waterfox$",
                 "^com\\.google\\.Chrome$",
                 "^com\\.apple\\.Safari$"
               ]
