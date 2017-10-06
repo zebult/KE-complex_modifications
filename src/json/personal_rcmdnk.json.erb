@@ -105,22 +105,17 @@
       %>
     },
     {
-      "description": "Browsers (cmd-(shift-)tab to cmd-opt-right(left))",
-      "extra_descriptions": [
-        "For Firefox, Chrome, Safari."
-      ],
+      "description": "Cmd-(Shift-)Tab to Cmd-Opt-Right(Left) (Select Next(Previous) Tab), 次(前)のタブを表示)",
       "manipulators": [
         {
           "type": "basic",
           "from": <%= from("tab", ["command"]) %>,
-          "to": <%= to([["right_arrow", ["command", "option"]]]) %>,
-          "conditions": [ <%= frontmost_application_if("browser") %> ]
+          "to": <%= to([["close_bracket", ["command", "shift"]]]) %>
         },
         {
           "type": "basic",
           "from": <%= from("tab", ["command", "shift"]) %>,
-          "to": <%= to([["left_arrow", ["command", "option"]]]) %>,
-          "conditions": [ <%= frontmost_application_if("browser") %> ]
+          "to": <%= to([["open_bracket", ["command", "shift"]]]) %>
         }
       ]
     },

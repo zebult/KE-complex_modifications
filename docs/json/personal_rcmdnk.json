@@ -1280,10 +1280,7 @@
       ]
     },
     {
-      "description": "Browsers (cmd-(shift-)tab to cmd-opt-right(left))",
-      "extra_descriptions": [
-        "For Firefox, Chrome, Safari."
-      ],
+      "description": "Cmd-(Shift-)Tab to Cmd-Opt-Right(Left) (Select Next(Previous) Tab), 次(前)のタブを表示)",
       "manipulators": [
         {
           "type": "basic",
@@ -1297,21 +1294,10 @@
           },
           "to": [
             {
-              "key_code": "right_arrow",
+              "key_code": "close_bracket",
               "modifiers": [
                 "command",
-                "option"
-              ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^org\\.mozilla\\.firefox$",
-                "^org\\.waterfoxproject\\.waterfox$",
-                "^com\\.google\\.Chrome$",
-                "^com\\.apple\\.Safari$"
+                "shift"
               ]
             }
           ]
@@ -1329,21 +1315,10 @@
           },
           "to": [
             {
-              "key_code": "left_arrow",
+              "key_code": "open_bracket",
               "modifiers": [
                 "command",
-                "option"
-              ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^org\\.mozilla\\.firefox$",
-                "^org\\.waterfoxproject\\.waterfox$",
-                "^com\\.google\\.Chrome$",
-                "^com\\.apple\\.Safari$"
+                "shift"
               ]
             }
           ]
