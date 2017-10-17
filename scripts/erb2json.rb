@@ -141,11 +141,18 @@ def frontmost_application(type, app_aliases, as_json=true)
     '^com\.apple\.finder$',
   ]
 
+  preview_bundle_identifiers = [
+    '^com\.apple\.Preview$',
+  ]
+
+  safari_bundle_identifiers = [
+    '^com\.apple\.Safari$',
+  ]
+
   browser_bundle_identifiers = [
     '^org\.mozilla\.firefox$',
     '^org\.waterfoxproject\.waterfox$',
-    '^com\.google\.Chrome$',
-    '^com\.apple\.Safari$',
+    '^com\.google\.Chrome$'
   ]
 
   emacs_bundle_identifiers = [
@@ -220,6 +227,14 @@ def frontmost_application(type, app_aliases, as_json=true)
     case app_alias
     when 'finder'
       bundle_identifiers.concat(finder_bundle_identifiers)
+
+    when 'preview'
+      bundle_identifiers.concat(preview_bundle_identifiers)
+
+    when 'mac_tab'
+      bundle_identifiers.concat(finder_bundle_identifiers)
+      bundle_identifiers.concat(preview_bundle_identifiers)
+      bundle_identifiers.concat(safari_bundle_identifiers)
 
     when 'iterm2'
       bundle_identifiers.concat(iterm2_bundle_identifiers)

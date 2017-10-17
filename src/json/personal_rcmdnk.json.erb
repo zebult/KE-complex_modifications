@@ -120,6 +120,57 @@
       ]
     },
     {
+      "description": "Ctrl-N(P) to Cmd-Opt-Right(Left) (Select Next(Previous) Tab), 次(前)のタブを表示)",
+      "extra_descriptions": [
+        "For Finder, Preview and Safari",
+        "If vim_emu is enabled, following commands are available, too:",
+        "d: tab close",
+        "u: tab restore (Safari Only)",
+        "t: tab open"
+      ],
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": <%= from("n", ["control"]) %>,
+          "to": <%= to([["close_bracket", ["command", "shift"]]]) %>,
+          "conditions": [ <%= frontmost_application_if("mac_tab") %> ]
+        },
+        {
+          "type": "basic",
+          "from": <%= from("p", ["control"]) %>,
+          "to": <%= to([["open_bracket", ["command", "shift"]]]) %>,
+          "conditions": [ <%= frontmost_application_if("mac_tab") %> ]
+        },
+        {
+          "type": "basic",
+          "from": <%= from("d") %>,
+          "to": <%= to([["w", ["command"]]]) %>,
+          "conditions": [
+            <%= frontmost_application_if("mac_tab") %>,
+            {"type": "variable_if", "name": "vim_emu_normal", "value": 1}
+          ]
+        },
+        {
+          "type": "basic",
+          "from": <%= from("u") %>,
+          "to": <%= to([["z", ["command"]]]) %>,
+          "conditions": [
+            <%= frontmost_application_if("mac_tab") %>,
+            {"type": "variable_if", "name": "vim_emu_normal", "value": 1}
+          ]
+        },
+        {
+          "type": "basic",
+          "from": <%= from("t") %>,
+          "to": <%= to([["t", ["command"]]]) %>,
+          "conditions": [
+            <%= frontmost_application_if("mac_tab") %>,
+            {"type": "variable_if", "name": "vim_emu_normal", "value": 1}
+          ]
+        }
+      ]
+    },
+    {
       "description": "Microsoft Office (ctrl-h, font, superscript/subscript)",
       "extra_descriptions": [
         "For Microsoft Office (Word, PowerPoint, Excel)."
@@ -270,6 +321,16 @@
           "type": "basic",
           "from": <%= from("open_bracket", ["control"]) %>,
           "to": <%= to([["escape"]]) %>
+        }
+      ]
+    },
+    {
+      "description": "Control-j to Return",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": <%= from("j", ["control"]) %>,
+          "to": <%= to([["return_or_enter"]]) %>
         }
       ]
     },
