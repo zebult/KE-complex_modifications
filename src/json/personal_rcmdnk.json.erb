@@ -320,7 +320,8 @@
         {
           "type": "basic",
           "from": <%= from("open_bracket", ["control"]) %>,
-          "to": <%= to([["escape"]]) %>
+          "to": <%= to([["escape"]]) %>,
+          "conditions": [ <%= frontmost_application_unless("vim_emu") %> ]
         }
       ]
     },
@@ -330,7 +331,8 @@
         {
           "type": "basic",
           "from": <%= from("j", ["control"]) %>,
-          "to": <%= to([["return_or_enter"]]) %>
+          "to": <%= to([["return_or_enter"]]) %>,
+          "conditions": [ <%= frontmost_application_unless("browser") %> ]
         }
       ]
     },
