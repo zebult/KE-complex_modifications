@@ -279,7 +279,7 @@ def frontmost_application(type, app_aliases, as_json=true)
       bundle_identifiers.concat(powerpoint_bundle_identifers)
       bundle_identifiers.concat(excel_bundle_identifers)
 
-    when 'vim_emu'
+    when 'vim_emu_exception'
       bundle_identifiers.concat(emacs_bundle_identifiers)
       bundle_identifiers.concat(remote_desktop_bundle_identifiers)
       bundle_identifiers.concat(terminal_bundle_identifiers)
@@ -352,7 +352,7 @@ def vim_emu(source_keys_list: :source_keys_list, dest_keys_list: :dest_keys_list
     dest_keys_list = [dest_keys_list]
     to_if_alone = [to_array(to_if_alone)]
   end
-  conditions_vim_emu_common = [frontmost_application_unless("vim_emu", false)]
+  conditions_vim_emu_common = [frontmost_application_unless("vim_emu_exception", false)]
   conditions_vim_emu_common += to_array(conditions) unless conditions == ""
   line = 0
   if move >= 10 and mode == ""

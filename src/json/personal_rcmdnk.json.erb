@@ -321,7 +321,7 @@
           "type": "basic",
           "from": <%= from("open_bracket", ["control"]) %>,
           "to": <%= to([["escape"]]) %>,
-          "conditions": [ <%= frontmost_application_unless("vim_emu") %> ]
+          "conditions": [ <%= frontmost_application_if("vim_emu_exception") %> ]
         }
       ]
     },
