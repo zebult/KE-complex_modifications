@@ -320,19 +320,32 @@
         {
           "type": "basic",
           "from": <%= from("open_bracket", ["control"]) %>,
-          "to": <%= to([["escape"]]) %>,
-          "conditions": [ <%= frontmost_application_if("vim_emu_exception") %> ]
+          "to": <%= to([["escape"]]) %>
         }
       ]
     },
     {
       "description": "Control-j to Return",
+      "extra_descriptions": [
+        "Other than browsers."
+      ],
       "manipulators": [
         {
           "type": "basic",
           "from": <%= from("j", ["control"]) %>,
           "to": <%= to([["return_or_enter"]]) %>,
           "conditions": [ <%= frontmost_application_unless("browser") %> ]
+        }
+      ]
+    },
+    {
+      "description": "Control-h to Backspace",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": <%= from("h", ["control"]) %>,
+          "to": <%= to([["delete_or_backspace"]]) %>,
+          "conditions": [ <%= frontmost_application_unless("emacs_key_bindings_exception") %> ]
         }
       ]
     },
