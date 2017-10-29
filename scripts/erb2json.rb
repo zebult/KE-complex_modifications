@@ -340,8 +340,40 @@ def device_if(device_aliases, as_json=true)
   device('device_if', device_aliases, as_json)
 end
 
-def device_unless(app_aliases, as_json=true)
+def device_unless(device_alias, as_json=true)
   device('device_unless', device_aliases, as_json)
+end
+
+def input_source(type, input_source_aliases, as_json=true)
+  input_sources = []
+  to_array(input_source_aliases).each do |input_source_alias|
+    if input_source_alias.is_a? Hash
+      input_sources << input_source_alias
+    end
+    if input_source_alias.include?("keylayout")
+      input_sources << { "input_source_id": input_source_alias}
+    elsif input_source_alias.include?("inputmethod")
+      input_sources << { "input_mode_id": input_source_alias}
+    else
+      input_sources << { "language": input_source_alias}
+    end
+  end
+
+  unless input_sources.empty?
+    data = {
+      "type" => type,
+      "input_sources" => input_sources
+    }
+    make_data(data, as_json)
+  end
+end
+
+def input_source_if(input_source_aliases, as_json=true)
+  input_source('input_source_if', input_source_aliases, as_json)
+end
+
+def input_source_unless(input_source_aliases, as_json=true)
+  input_source('input_source_unless', input_source_aliases, as_json)
 end
 
 def vim_emu(source_keys_list: :source_keys_list, dest_keys_list: :dest_keys_list, from_mandatory_modifiers: [], from_optional_modifiers: [], to_pre_events: [], to_modifiers: [], to_post_events: [], to_if_alone: [], to_after_key_up: [], conditions: "", as_json: false, mode: "", move: 0)

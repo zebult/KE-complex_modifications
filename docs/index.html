@@ -266,25 +266,30 @@
 
 
 <p style="margin-top: 20px; font-weight: bold">
-  ESC (or Control-[) sends ESC EISU ESC
+  ESC sends EISU ESC ESC when lang = ja
 </p>
 
-<ul>
-  <li>For terminal, vim, emacs.</li>
-  <li>Send ESC, EISU and ESC to stop changing at IME, disable IME and change to Normal mode at Vim at once.</li>
-  <li>Need to disable ESC at copy mode if GNU screen is used. Add following line in your .screenrc to disable ESC at copy mode:<br><code>bindkey -m ^[ eval ''</code></li>
-</ul>
 
 
 <table class="table">
   <captions>Key bindings</captions>
   <tr>
     <td>escape</td>
-    <td>escape, japanese_eisuu, escape</td>
+    <td>japanese_eisuu, escape, escape</td>
   </tr>
+</table>
+
+<p style="margin-top: 20px; font-weight: bold">
+  Control-[ sends EISU ESC ESC when lang = ja
+</p>
+
+
+
+<table class="table">
+  <captions>Key bindings</captions>
   <tr>
     <td>control-open_bracket</td>
-    <td>escape, japanese_eisuu, escape</td>
+    <td>japanese_eisuu, escape, escape</td>
   </tr>
 </table>
 

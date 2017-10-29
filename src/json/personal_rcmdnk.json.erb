@@ -44,22 +44,26 @@
       %>
     },
     {
-      "description": "ESC (or Control-[) sends ESC EISU ESC",
-      "extra_descriptions": [
-        "For terminal, vim, emacs.",
-        "Send ESC, EISU and ESC to stop changing at IME, disable IME and change to Normal mode at Vim at once.",
-        "Need to disable ESC at copy mode if GNU screen is used. Add following line in your .screenrc to disable ESC at copy mode:<br><code>bindkey -m ^[ eval ''</code>"
-      ],
-      "manipulators":
-      <%=
-        each_key(
-          source_keys_list: ["escape", hash_from("open_bracket", ["control"])],
-          dest_keys_list: [[], []],
-          to_post_events: ["escape", "japanese_eisuu", "escape"],
-          conditions: [frontmost_application_if("emacs_key_bindings_exception", false)],
-          as_json: true
-        )
-      %>
+      "description": "ESC sends EISU ESC ESC when lang = ja",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": <%= from("escape") %>,
+          "to": <%= to([["japanese_eisuu"], ["escape"], ["escape"]]) %>,
+          "conditions": [ <%= input_source_if("ja") %> ]
+        }
+      ]
+    },
+    {
+      "description": "Control-[ sends EISU ESC ESC when lang = ja",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": <%= from("open_bracket", ["control"]) %>,
+          "to": <%= to([["japanese_eisuu"], ["escape"], ["escape"]]) %>,
+          "conditions": [ <%= input_source_if("ja") %> ]
+        }
+      ]
     },
     {
       "description": "Copy and Paste, ctrl-z/x/c/v to cmd-z/x/c/v",
