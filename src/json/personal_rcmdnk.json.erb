@@ -44,24 +44,30 @@
       %>
     },
     {
-      "description": "ESC sends EISU ESC ESC when lang = ja",
+      "description": "ESC sends EISU ESC ESC when language is ja",
+      "extra_descriptions": [
+        "For terminal, vim, emacs, browsers."
+      ],
       "manipulators": [
         {
           "type": "basic",
           "from": <%= from("escape") %>,
           "to": <%= to([["japanese_eisuu"], ["escape"], ["escape"]]) %>,
-          "conditions": [ <%= input_source_if("ja") %> ]
+          "conditions": [ <%= input_source_if("ja") %>, <%= frontmost_application_if("vim_emu_exception") %> ]
         }
       ]
     },
     {
-      "description": "Control-[ sends EISU ESC ESC when lang = ja",
+      "description": "Control-[ sends EISU ESC ESC when language is ja",
+      "extra_descriptions": [
+        "For terminal, vim, emacs, browsers."
+      ],
       "manipulators": [
         {
           "type": "basic",
           "from": <%= from("open_bracket", ["control"]) %>,
           "to": <%= to([["japanese_eisuu"], ["escape"], ["escape"]]) %>,
-          "conditions": [ <%= input_source_if("ja") %> ]
+          "conditions": [ <%= input_source_if("ja") %>, <%= frontmost_application_if("vim_emu_exception") %> ]
         }
       ]
     },
