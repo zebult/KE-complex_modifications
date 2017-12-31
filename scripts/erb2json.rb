@@ -3,6 +3,15 @@
 require 'erb'
 require 'json'
 
+def block(key_code, mode_name, key, as_json=true)
+    data = {}
+    data['type'] = "basic"
+    data['from'] = {"key_code": key, "modifiers": {"optional": ["any"]}}
+    data['to'] = [{"key_code": key_code}, {"key_code": key}, {"key_code": "vk_none"}]
+    data['conditions'] = [{"type": "variable_if", "name": mode_name, "value": 1}]
+    make_data(data, as_json)
+end
+
 def deepcopy(data)
   Marshal.load(Marshal.dump(data))
 end
